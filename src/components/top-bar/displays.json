@@ -1,0 +1,18 @@
+[
+  {
+    "display": "Transformations",
+    "route": "/"
+  },
+  {
+    "display": "Plugins",
+    "route": "/plugins"
+  },
+  {
+    "display": "Deployments",
+    "route": "/deployments"
+  },
+  {
+    "display": "Simulator",
+    "route": "/simulator" 
+  }
+]
