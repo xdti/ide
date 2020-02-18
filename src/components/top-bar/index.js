@@ -45,7 +45,7 @@ export default function TopBar(props) {
             props.displays.map((d, i) => (
               <Tab
                 key={d.route}
-                label={d.display}
+                label={d.label}
                 id={`nav-tab-${i}`}
                 aria-controls={`nav-tabpanel-${i}`}
                 onClick={(e) => {

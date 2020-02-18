@@ -10,11 +10,14 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     height: '100vh',
-    width: '100vw'
+    width: '100vw',
+    backgroundColor: 'rgba(0,0,0, 0.03)'
   },
   content: {
     flexGrow: 1,
-    overflow: 'auto',
+    overflow: 'hidden',
+    display: 'flex',
+    padding: 20
   },
 }));
 
@@ -29,7 +32,7 @@ export default function App() {
           <Switch>
             {
               displays.map(d => (
-                <Route exact path={d.route}>
+                <Route key={d.route} exact path={d.route}>
                   {d.display}
                 </Route>
               ))

@@ -1,11 +1,12 @@
 import React from 'react';
+import Transformations from 'components/transformations';
 import Typography from '@material-ui/core/Typography';
 
 export default [
   {
     label: "Transformations",
     route: "/",
-    display: <Typography>Transformations</Typography>
+    display: <Transformations />
   },
   {
     label: "Plugins",
