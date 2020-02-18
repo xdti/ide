@@ -8,7 +8,7 @@ export default {
           description: "Turn html into json sad asd sad asdasf dsgfsdgsfg fdgfd gdf gdfgdfg fdgdf gdf gdfgdf gdfg dfgdfgdfg dfgdfgdfgfdg dfgdfg dfgd fgdfg asdasdf asdfsdfsdfsdfsdfsdfsdfsdf sdfsdfsdfsdfsdf sdfdsf sdfsd fsd fsd f sdfsdfsdfs dfsd fsd fs dfsdfsdfsdfsd gvb xcv xcv xvxc vxc vxc vxc vxcvx cvsd gsd gfdgfd gdfg fdg dfgdfg ",
           input: 'XML',
           output: 'JSON',
-          owner: '784tamirr',
+          owner: 'Tamir Revivi',
           metadata: {}
         },
         {
