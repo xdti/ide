@@ -6,6 +6,20 @@ import TopBar from 'components/top-bar';
 import displays from './displays';
 
 const useStyles = makeStyles(theme => ({
+  '@global': {
+    '*::-webkit-scrollbar': {
+      width: '12px',
+	    backgroundColor: '#F5F5F5'
+    },
+    '*::-webkit-scrollbar-track': {
+      '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.3)',
+    	backgroundColor: '#F5F5F5'
+    },
+    '*::-webkit-scrollbar-thumb': {
+
+      backgroundColor: '#acacac'
+    }
+  },
   app: {
     display: 'flex',
     flexDirection: 'column',
@@ -16,8 +30,7 @@ const useStyles = makeStyles(theme => ({
   content: {
     flexGrow: 1,
     overflow: 'hidden',
-    display: 'flex',
-    padding: 20
+    display: 'flex'
   },
 }));
 
