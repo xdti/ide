@@ -101,7 +101,7 @@ export default function Transformation(props) {
   const classes = useStyles();
   const transformation = props.transformation;
 
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const [metadataCount, setMetadataCount] = React.useState(Object.keys(transformation.metadata).length);
   let propContainer = React.createRef();
 
