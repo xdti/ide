@@ -6,8 +6,10 @@ import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import Button from '@material-ui/core/Button';
 import TablePagination from '@material-ui/core/TablePagination';
 import Search from '@material-ui/icons/Search';
+import Add from '@material-ui/icons/Add';
 import dal from 'dal';
 
 const useStyles = makeStyles(theme => ({
@@ -22,6 +24,12 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center'
+  },
+  actions: {
+    display: 'flex',
+    "& *:not(:last-child)": {
+      marginRight: 15
+    }
   },
   list: {
     overflow: 'auto',
@@ -46,7 +54,7 @@ export default function Transformations() {
   const [page, setPage] = React.useState(0);
   const [query, setQuery] = React.useState("");
   const [error, setError] = React.useState(null);
-  const getTransformationList = () => transformations.filter(t => t.name.startsWith(query))
+  const getTransformationList = () => transformations.filter(t => t.name.toLowerCase().startsWith(query.toLowerCase()))
   const getCurrentPage = () => getTransformationList().slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
   React.useEffect(() => {
     dal.transformations.getAll().then(setTransformations).catch(setError)
@@ -56,13 +64,16 @@ export default function Transformations() {
     <div className={classes.container}>
       <div className={classes.menu}>
         <Typography variant="h5">Transformations</Typography>
-        <TextField variant="outlined" placeholder="Type here to search" InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <Search />
-            </InputAdornment>
-          ),
-        }} value={query} onChange={(e) => setQuery(e.target.value)}/>
+        <div className={classes.actions}>
+          <Button variant="contained" color="primary"><Add/> New Transformation</Button>
+          <TextField variant="outlined" placeholder="Type here to search" InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Search />
+              </InputAdornment>
+            ),
+          }} value={query} onChange={(e) => setQuery(e.target.value)}/>
+        </div>
       </div>
       <List className={classes.list}>
         {
