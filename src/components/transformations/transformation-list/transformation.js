@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   listItemOpen: {
-    height: '130pt'
+    height: '150pt'
   },
   divider: {
     marginBottom: 10
@@ -79,6 +79,7 @@ const useStyles = makeStyles(theme => ({
   },
   formats: {
     display: 'flex',
+    padding: '10pt 0',
     alignItems: 'center',
     '& .MuiTypography-root': {
       fontSize: 'large'
