@@ -156,7 +156,7 @@ export default function Transformation(props) {
                   }
                 </div>
                 <div className={classes.actions}>
-                  <Button color="primary" variant="contained">
+                  <Button color="primary" variant="contained" onClick={props.setTransformation}>
                     <Edit />
                   </Button>
                   <Button color="secondary" variant="contained">

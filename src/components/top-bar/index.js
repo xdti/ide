@@ -1,4 +1,5 @@
 import React from 'react';
+import { matchPath } from 'react-router';
 import { useHistory, useLocation } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -24,7 +25,7 @@ export default function TopBar(props) {
 
   const history = useHistory();
   const location = useLocation();
-  const currentDisplay = props.displays.findIndex(d => d.route === location.pathname);
+  const currentDisplay = props.displays.findIndex(d => matchPath(location.pathname, d.route) !== null);
   const [display, setDisplay] = React.useState(currentDisplay);
 
   return (
@@ -50,7 +51,7 @@ export default function TopBar(props) {
                 aria-controls={`nav-tabpanel-${i}`}
                 onClick={(e) => {
                   e.preventDefault();
-                  history.push(d.route);
+                  history.push(d.route.split(':')[0]);
                 }}
               />
             ))

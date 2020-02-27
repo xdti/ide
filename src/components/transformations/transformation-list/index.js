@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function TransformationList() {
+export default function TransformationList(props) {
   const classes = useStyles();
   const [transformations, setTransformations] = React.useState([]);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -39,7 +39,7 @@ export default function TransformationList() {
   return (
     <div className={classes.container}>
       <Menu setQuery={(v) => setQuery(v)} query={query} />
-      <List transformations={getCurrentPage()}/>
+      <List transformations={getCurrentPage()} setTransformation={props.setTransformation}/>
       <Pagination
         count={getTransformationList().length}
         rowsPerPage={rowsPerPage}
