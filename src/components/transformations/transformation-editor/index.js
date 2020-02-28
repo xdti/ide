@@ -18,7 +18,7 @@ export default function TransformationEditor(props) {
 
   React.useEffect(() => {
     dal.transformations.get(props.transformationId).then(setTransformation).catch(setError)
-  }, []);
+  }, [props.transformationId]);
 
   return (
     <div className={classes.container}>
