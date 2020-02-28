@@ -6,7 +6,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import Divider from '@material-ui/core/Divider';
-import ExtraDetails from './extraDetails';
+import ExtraDetails from './extra-details';
 
 const useStyles = makeStyles(theme => ({
   listItem: {
