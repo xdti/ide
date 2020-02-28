@@ -69,7 +69,7 @@ export default function Transformation(props) {
         open ? (
           <div className={classes.extraDetails}>
             <Divider className={classes.divider}/>
-            <ExtraDetails transformation={transformation}/>
+            <ExtraDetails transformation={transformation} setTransformation={props.setTransformation}/>
           </div>
         ) : ""
       }
