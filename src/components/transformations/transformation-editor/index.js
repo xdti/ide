@@ -1,12 +1,17 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import ToolBar from '@material-ui/core/ToolBar';
-import Typography from '@material-ui/core/Typography';
 import dal from 'dal';
+import Header from './header';
+import ObjectSelector from './object-selector';
 
 const useStyles = makeStyles(theme => ({
   container: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1
+  },
+  content: {
+    display: 'flex',
     flexGrow: 1
   }
 }));
@@ -22,11 +27,12 @@ export default function TransformationEditor(props) {
 
   return (
     <div className={classes.container}>
-      <AppBar position="relative" color="default">
-        <ToolBar>
-          <Typography variant="h6">{transformation.name}</Typography>
-        </ToolBar>
-      </AppBar>
+      <Header name={transformation.name} />
+      <div className={classes.content}>
+        <ObjectSelector />
+        <div className={classes.editors}>
+        </div>
+      </div>
     </div>
   );
 };
