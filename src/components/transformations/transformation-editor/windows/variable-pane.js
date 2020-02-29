@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
+import capitalize from 'lodash/capitalize';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -41,7 +42,7 @@ export default function VariablePane(props) {
       >
         {
           props.varTypes.options.map(o => (
-            <MenuItem key={o} value={o}>{o}</MenuItem>
+            <MenuItem key={o} value={o}>{capitalize(o)}</MenuItem>
           ))
         }
       </TextField>
