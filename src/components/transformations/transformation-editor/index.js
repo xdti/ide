@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function TransformationEditor(props) {
   const classes = useStyles();
-  const [transformation, setTransformation] = React.useState([]);
+  const [transformation, setTransformation] = React.useState({});
   const [error, setError] = React.useState(null);
 
   React.useEffect(() => {
