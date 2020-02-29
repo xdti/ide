@@ -12,10 +12,10 @@ const useStyles = makeStyles(theme => ({
 
 export default function VariablePane(props) {
   const classes = useStyles();
-
+  const update = (updates) => props.update(props.windowId, "var", updates)
   return (
     <div className={classes.container}>
-      <TextField variant="outlined" label="Name" value={props.data.name} onChange={(e) => props.update(e.target.value)}/>
+      <TextField variant="outlined" label="Name" value={props.data.name} onChange={(e) => update({ name: e.target.value })}/>
     </div>
   );
 };

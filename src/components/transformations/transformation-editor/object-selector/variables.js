@@ -59,7 +59,7 @@ export default function Variables(props) {
       value: "",
       order
     };
-    props.update({ variables: { [uuid()]: newVar } })
+    props.update(uuid(), newVar)
   }
   const selectVar = (id) => props.select(id, "var", props.variables[id])
 
@@ -69,7 +69,12 @@ export default function Variables(props) {
         varList.map(v => (
           <React.Fragment key={v.id}>
             <ListItem button onClick={() => selectVar(v.id)} className={classes.listItem} title={v.name}>
-              <ListItemText primary={v.name} secondary={v.description} secondaryTypographyProps={{noWrap: true, title: v.description}}/>
+              <ListItemText
+                primary={v.name}
+                secondary={v.description}
+                secondaryTypographyProps={{ noWrap: true, title: v.description }}
+                primaryTypographyProps={{ noWrap: true, component: 'p' }}
+              />
               {
                 v.required ? (
                   <ListItemAvatar title="Required">

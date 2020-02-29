@@ -24,7 +24,7 @@ export default function Windows(props) {
   const currentWindow = props.windows[props.selectedWindow];
 
   const windowPaneFactories = {
-    var: (w) => <VariablePane data={w.data} />
+    var: (id, w) => <VariablePane data={w.data} windowId={id} update={props.update} />
   }
 
   return (
@@ -36,7 +36,7 @@ export default function Windows(props) {
         closeWindow={props.closeWindow}
       />
       {
-        currentWindow ? windowPaneFactories[currentWindow.type](currentWindow) : ""
+        currentWindow ? windowPaneFactories[currentWindow.type](props.selectedWindow, currentWindow) : ""
       }
     </div>
   );

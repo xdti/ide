@@ -25,11 +25,15 @@ const useStyles = makeStyles(theme => ({
     width: '77vw',
     '& .MuiTabs-scroller': {
       display: 'flex'
+    },
+    '& .MuiTab-wrapper': {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      width: '150pt'
     }
   },
   closeButton: {
-    position: 'absolute',
-    right: 0
+    padding: 0
   }
 }));
 
@@ -61,7 +65,7 @@ export default function WindowSelector(props) {
               <Tab
                 component="div"
                 key={id}
-                label={<><Typography>{w.data.name}</Typography>{renderCloseButton(id)}</>}
+                label={<><Typography noWrap={true}>{w.data.name}</Typography>{renderCloseButton(id)}</>}
                 id={id}
                 aria-controls={id}
                 value={id}

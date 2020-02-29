@@ -36,6 +36,10 @@ export default function TransformationEditor(props) {
     setWindows(newWindows);
     setSelectedWindow(id);
   }
+  const updateWindow = (id, updates) => {
+    let newWindows = merge({}, windows, { [id]: { data: updates }});
+    setWindows(newWindows);
+  }
   const closeWindow = (id) => {
     let newWindows = cloneDeep(windows);
     delete newWindows[id];
@@ -56,6 +60,9 @@ export default function TransformationEditor(props) {
     let newStagingArea = merge({}, stagingArea, updates);
     setStagingArea(newStagingArea);
   }
+  const stagingUpdaters = {
+    var: (id, updates) => updateStagingArea({ variables: { [id]: updates }})
+  }
 
   React.useEffect(() => {
     let newStagedTransformation = merge({}, transformation, stagingArea);
@@ -70,12 +77,17 @@ export default function TransformationEditor(props) {
     <div className={classes.container}>
       <Header name={transformation.name} />
       <div className={classes.content}>
-        <ObjectSelector transformation={stagedTransformation} update={updateStagingArea} select={addWindow}/>
+        <ObjectSelector transformation={stagedTransformation} updaters={stagingUpdaters} select={addWindow}/>
         <Windows
           windows={windows}
           selectedWindow={selectedWindow}
           selectWindow={selectWindow}
           closeWindow={closeWindow}
+          update={(id, type, updates) => {
+            console.log(id);
+            updateWindow(id, updates)
+            stagingUpdaters[type](id, updates)
+          }}
         />
       </div>
     </div>
