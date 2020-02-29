@@ -3,7 +3,21 @@ import transformations from './transformation-mock'
 const varTypes = {
   'XML': {
     default: 'xpath',
-    options: ['xpath', 'expression']
+    defaultProps: {
+      dataType: 'string'
+    },
+    options: [
+      {
+        value: 'xpath',
+        display: 'XPath',
+        dataTypes: ['string', 'int', 'float', 'bool', 'list']
+      },
+      {
+        value: 'expression',
+        display: 'Expression',
+        dataTypes: ['string', 'int', 'float', 'bool', 'list']
+      }
+    ]
   }
 }
 

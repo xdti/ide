@@ -57,7 +57,8 @@ export default function Variables(props) {
       required: false,
       type: props.varTypes.default,
       value: "",
-      order
+      order,
+      ...props.varTypes.defaultProps
     };
     props.update(uuid(), newVar)
   }

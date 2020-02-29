@@ -30,6 +30,7 @@
       "description": "This is an example var and i want it to overflow",
       "type": "xpath",
       "value": "/Example/Var1/text()",
+      "dataType": "string",
       "required": true
     }
   }

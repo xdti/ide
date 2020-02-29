@@ -1,11 +1,23 @@
 import React from 'react';
 import merge from 'lodash/merge';
+import omitByDeep from 'helpers/omitByDeep';
+import isNull from 'lodash/isNull';
 import cloneDeep from 'lodash/cloneDeep';
 import { makeStyles } from '@material-ui/core/styles';
 import dal from 'dal';
 import Header from './header';
 import ObjectSelector from './object-selector';
 import Windows from './windows';
+
+// const omitByDeep = (obj, cb) => {
+//   let res = omitBy(obj, cb);
+//   for (let key in res){
+//     if (isObject(res[key])){
+//       res[key] = omitByDeep(res[key], cb);
+//     }
+//   }
+//   return res;
+// }
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -65,7 +77,7 @@ export default function TransformationEditor(props) {
   }
 
   React.useEffect(() => {
-    let newStagedTransformation = merge({}, transformation, stagingArea);
+    let newStagedTransformation = omitByDeep(merge({}, transformation, stagingArea), isNull);
     setStagedTransformation(newStagedTransformation);
   }, [transformation, stagingArea]);
 

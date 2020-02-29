@@ -1,8 +1,9 @@
 import React from 'react';
+import capitalize from 'lodash/capitalize';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
-import capitalize from 'lodash/capitalize';
+import XPathEditor from './xpath-editor'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -12,18 +13,40 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'stretch',
-    '& .MuiTextField-root': {
+    '&>.MuiTextField-root': {
       width: '100%',
       '&:not(:last-child)': {
         marginBottom: 20
       }
     }
+  },
+  pathEditor: {
+    display: 'flex',
+    width: '100%',
+    '&>.MuiTextField-root:not(:last-child)': {
+      marginRight: 10
+    }
+  },
+  pathValueInput: {
+    width: '100%'
+  },
+  dataTypeInput: {
+    width: '150pt'
   }
 }));
 
 export default function VariablePane(props) {
   const classes = useStyles();
-  const update = (updates) => props.update(props.windowId, "var", updates)
+  const update = (updates) => props.update(props.windowId, "var", updates);
+  const renderValueEditor = {
+    xpath: (
+      <XPathEditor
+        config={props.varTypes.options.find(t => t.value === 'xpath')}
+        data={props.data}
+        update={update}
+      />
+    )
+  }
 
   return (
     <div className={classes.container}>
@@ -42,10 +65,13 @@ export default function VariablePane(props) {
       >
         {
           props.varTypes.options.map(o => (
-            <MenuItem key={o} value={o}>{capitalize(o)}</MenuItem>
+            <MenuItem key={o.value} value={o.value}>{o.display}</MenuItem>
           ))
         }
       </TextField>
+      {
+        renderValueEditor[props.data.type]
+      }
     </div>
   );
 };
