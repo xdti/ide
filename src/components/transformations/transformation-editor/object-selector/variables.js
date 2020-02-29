@@ -18,6 +18,7 @@ const useStyles = makeStyles(theme => ({
     padding: 0,
     overflowY: 'auto',
     width: '15vw',
+    zIndex: 2,
     '& .MuiListItemAvatar-root': {
       display: 'flex',
       justifyContent: 'flex-end'
@@ -60,7 +61,7 @@ export default function Variables(props) {
     };
     props.update({ variables: { [uuid()]: newVar } })
   }
-  const selectVar = (id) => props.select(id, props.variables[id])
+  const selectVar = (id) => props.select(id, "var", props.variables[id])
 
   return (
     <List className={classes.list}>

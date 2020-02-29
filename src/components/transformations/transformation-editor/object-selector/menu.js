@@ -7,7 +7,7 @@ import Tab from '@material-ui/core/Tab';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
-    zIndex: 1,
+    zIndex: 3,
     width: '8vw',
     '& .MuiTabs-root': {
       flexGrow: 1,

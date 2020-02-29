@@ -11,8 +11,9 @@ import Close from '@material-ui/icons/Close';
 const useStyles = makeStyles(theme => ({
   appBar: {
     zIndex: 1,
-    height: '55pt !important',
+    height: 'calc(55pt + 1px)',
     width: '77vw',
+    backgroundColor: '#fafafa',
   },
   toolbar: {
     padding: 0,
@@ -20,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   },
   tabs: {
     minHeight: 'inherit',
-    height: '55pt',
+    height: 'calc(55pt + 1px)',
     width: '77vw',
     '& .MuiTabs-scroller': {
       display: 'flex'
@@ -56,13 +57,13 @@ export default function WindowSelector(props) {
           className={classes.tabs}
         >
           {
-            Object.entries(props.windows).map(([id, obj]) => (
+            Object.entries(props.windows).map(([id, w]) => (
               <Tab
                 component="div"
                 key={id}
-                label={<><Typography>{obj.name}</Typography>{renderCloseButton(id)}</>}
-                id={obj.id}
-                aria-controls={obj.id}
+                label={<><Typography>{w.data.name}</Typography>{renderCloseButton(id)}</>}
+                id={id}
+                aria-controls={id}
                 value={id}
               />
             ))

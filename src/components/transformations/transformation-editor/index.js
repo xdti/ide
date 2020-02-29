@@ -1,5 +1,5 @@
 import React from 'react';
-import mergeWith from 'lodash/mergeWith';
+import merge from 'lodash/merge';
 import cloneDeep from 'lodash/cloneDeep';
 import isArray from 'lodash/isArray';
 import { makeStyles } from '@material-ui/core/styles';
@@ -31,8 +31,8 @@ export default function TransformationEditor(props) {
   const [previouslySelectedWindow, setPreviouslySelectedWindow] = React.useState(null);
   const [error, setError] = React.useState(null);
 
-  const addWindow = (id, obj) => {
-    let newWindows = mergeWith({}, windows, { [id]: obj });
+  const addWindow = (id, type, data) => {
+    let newWindows = merge({}, windows, { [id]: { type, data } });
     setWindows(newWindows);
     setSelectedWindow(id);
   }
@@ -53,12 +53,12 @@ export default function TransformationEditor(props) {
     setSelectedWindow(id);
   }
   const updateStagingArea = (updates) => {
-    let newStagingArea = mergeWith({}, stagingArea, updates);
+    let newStagingArea = merge({}, stagingArea, updates);
     setStagingArea(newStagingArea);
   }
 
   React.useEffect(() => {
-    let newStagedTransformation = mergeWith({}, transformation, stagingArea);
+    let newStagedTransformation = merge({}, transformation, stagingArea);
     setStagedTransformation(newStagedTransformation);
   }, [transformation, stagingArea]);
 

@@ -8,18 +8,24 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Close from '@material-ui/icons/Close';
 import WindowSelector from './window-selector';
+import VariablePane from './variable-pane';
 
 const useStyles = makeStyles(theme => ({
   container: {
     display: 'flex',
     flexShrink: 0,
     width: '77vw',
-    alignItems: 'flex-start'
+    flexDirection: 'column'
   }
 }));
 
 export default function Windows(props) {
   const classes = useStyles();
+  const currentWindow = props.windows[props.selectedWindow];
+
+  const windowPaneFactories = {
+    var: (w) => <VariablePane data={w.data} />
+  }
 
   return (
     <div className={classes.container}>
@@ -29,6 +35,9 @@ export default function Windows(props) {
         selectWindow={props.selectWindow}
         closeWindow={props.closeWindow}
       />
+      {
+        currentWindow ? windowPaneFactories[currentWindow.type](currentWindow) : ""
+      }
     </div>
   );
 };
