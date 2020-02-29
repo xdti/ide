@@ -7,6 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Close from '@material-ui/icons/Close';
+import WindowSelector from './window-selector';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -14,68 +15,20 @@ const useStyles = makeStyles(theme => ({
     flexShrink: 0,
     width: '77vw',
     alignItems: 'flex-start'
-  },
-  appBar: {
-    zIndex: 1,
-    height: '55pt !important',
-    width: '77vw',
-  },
-  toolbar: {
-    padding: 0,
-    width: '77vw',
-  },
-  tabs: {
-    minHeight: 'inherit',
-    height: '55pt',
-    width: '77vw',
-    '& .MuiTabs-scroller': {
-      display: 'flex'
-    }
-  },
-  closeButton: {
-    position: 'absolute',
-    right: 0
   }
 }));
 
 export default function Windows(props) {
   const classes = useStyles();
-  const renderCloseButton = (id) => (
-    <IconButton className={classes.closeButton} onClick={(e) => {
-      e.stopPropagation();
-      props.closeWindow(id);
-    }}>
-      <Close/>
-    </IconButton>
-  )
+
   return (
     <div className={classes.container}>
-      <AppBar position="relative" color="default" className={classes.appBar}>
-        <ToolBar className={classes.toolbar}>
-          <Tabs
-            aria-label="windows"
-            textColor="inherit"
-            variant="scrollable"
-            value={props.selectedWindow}
-            onChange={(e, v) => props.selectWindow(v)}
-            indicatorColor="primary"
-            className={classes.tabs}
-          >
-            {
-              Object.entries(props.windows).map(([id, obj]) => (
-                <Tab
-                  component="div"
-                  key={id}
-                  label={<><Typography>{obj.name}</Typography>{renderCloseButton(id)}</>}
-                  id={obj.id}
-                  aria-controls={obj.id}
-                  value={id}
-                />
-              ))
-            }
-          </Tabs>
-        </ToolBar>
-      </AppBar>
+      <WindowSelector
+        selectedWindow={props.selectedWindow}
+        windows={props.windows}
+        selectWindow={props.selectWindow}
+        closeWindow={props.closeWindow}
+      />
     </div>
   );
 };
