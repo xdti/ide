@@ -55,7 +55,7 @@ export default function Variables(props) {
       name: `var${order}`,
       description: 'New variable',
       required: false,
-      type: 'xpath',
+      type: props.varTypes.default,
       value: "",
       order
     };

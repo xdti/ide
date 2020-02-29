@@ -29,6 +29,7 @@ export default function TransformationEditor(props) {
   const [selectedWindow, setSelectedWindow] = React.useState(null);
   const [previouslySelectedWindow, setPreviouslySelectedWindow] = React.useState(null);
   const [error, setError] = React.useState(null);
+  const [varTypes, setVarTypes] = React.useState([]);
 
   const addWindow = (id, type, data) => {
     let newWindows = merge({}, windows, { [id]: { type, data } });
@@ -69,6 +70,10 @@ export default function TransformationEditor(props) {
   }, [transformation, stagingArea]);
 
   React.useEffect(() => {
+    dal.transformations.getVarTypesByInput(transformation.input).then(setVarTypes).catch(setError)
+  }, [transformation]);
+
+  React.useEffect(() => {
     dal.transformations.get(props.transformationId).then(setTransformation).catch(setError)
   }, [props.transformationId]);
 
@@ -76,17 +81,22 @@ export default function TransformationEditor(props) {
     <div className={classes.container}>
       <Header name={transformation.name} />
       <div className={classes.content}>
-        <ObjectSelector transformation={stagedTransformation} updaters={stagingUpdaters} select={addWindow}/>
+        <ObjectSelector
+          transformation={stagedTransformation}
+          updaters={stagingUpdaters}
+          select={addWindow}
+          varTypes={varTypes}
+        />
         <Windows
           windows={windows}
           selectedWindow={selectedWindow}
           selectWindow={selectWindow}
           closeWindow={closeWindow}
           update={(id, type, updates) => {
-            console.log(id);
             updateWindow(id, updates)
             stagingUpdaters[type](id, updates)
           }}
+          varTypes={varTypes}
         />
       </div>
     </div>

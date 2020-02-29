@@ -16,7 +16,12 @@ export default function ObjectSelector(props){
   const [objectType, setObjectType] = React.useState('vars');
 
   const objectSelectors = {
-    vars: <Variables variables={transformation.variables} update={props.updaters.var} select={props.select}/>
+    vars: <Variables
+      varTypes={props.varTypes}
+      variables={transformation.variables}
+      update={props.updaters.var}
+      select={props.select}
+    />
   }
 
   return (
