@@ -34,8 +34,7 @@ const useStyles = makeStyles(theme => ({
   },
   closeButton: {
     position: 'absolute',
-    right: 0,
-    zIndex: 5
+    right: 0
   }
 }));
 
