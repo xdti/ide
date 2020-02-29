@@ -1,0 +1,76 @@
+import React from 'react';
+import { v4 as uuid } from 'uuid';
+import { makeStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Add from '@material-ui/icons/Add';
+import Avatar from '@material-ui/core/Avatar';
+import Divider from '@material-ui/core/Divider';
+
+const useStyles = makeStyles(theme => ({
+  list: {
+    backgroundColor: '#fafafa',
+    boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
+    padding: 0,
+    width: '200pt',
+    overflowY: 'auto',
+    '& .MuiListItemAvatar-root': {
+      display: 'flex',
+      justifyContent: 'flex-end'
+    },
+    '& .MuiAvatar-root': {
+      color: 'black',
+      fontWeight: '1000',
+      backgroundColor: 'unset',
+      margin: 0
+    }
+  },
+  addVar: {
+    justifyContent: 'center'
+  }
+}));
+
+export default function Variables(props) {
+  const classes = useStyles();
+  const addVar = () => {
+    let newVar = {
+      id: uuid(),
+      name: `var${props.variables.length + 1}`,
+      description: 'New variable',
+      required: false,
+      type: 'xpath',
+      value: ""
+    };
+    props.update({ variables: [newVar] })
+  }
+
+  return (
+    <List className={classes.list}>
+      {
+        props.variables.map((v, i) => (
+          <React.Fragment key={v.id}>
+            <ListItem button>
+              <ListItemText primary={v.name} secondary={v.description} />
+              {
+                v.required ? (
+                  <ListItemAvatar title="Required">
+                    <Avatar>*</Avatar>
+                  </ListItemAvatar>
+                ) : ""
+              }
+            </ListItem>
+            <Divider />
+          </React.Fragment>
+        ))
+      }
+      <ListItem button className={classes.addVar} onClick={addVar}>
+        <ListItemIcon>
+          <Add />
+        </ListItemIcon>
+      </ListItem>
+    </List>
+  );
+};
