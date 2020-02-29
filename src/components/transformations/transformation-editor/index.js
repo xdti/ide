@@ -1,7 +1,6 @@
 import React from 'react';
 import merge from 'lodash/merge';
 import cloneDeep from 'lodash/cloneDeep';
-import isArray from 'lodash/isArray';
 import { makeStyles } from '@material-ui/core/styles';
 import dal from 'dal';
 import Header from './header';
