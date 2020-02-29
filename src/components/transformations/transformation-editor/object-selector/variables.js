@@ -50,7 +50,7 @@ export default function Variables(props) {
   return (
     <List className={classes.list}>
       {
-        props.variables.map((v, i) => (
+        props.variables.map(v => (
           <React.Fragment key={v.id}>
             <ListItem button>
               <ListItemText primary={v.name} secondary={v.description} />
