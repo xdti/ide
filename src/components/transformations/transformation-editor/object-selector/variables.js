@@ -1,5 +1,6 @@
 import React from 'react';
 import { v4 as uuid } from 'uuid';
+import mergeWith from 'lodash/mergeWith';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -35,22 +36,32 @@ const useStyles = makeStyles(theme => ({
 
 export default function Variables(props) {
   const classes = useStyles();
+  const [varList, setVarList] = React.useState([]);
+  React.useEffect(() => {
+    let variables = props.variables || {};
+    let newVarList = Object.entries(variables)
+      .map(([id, v]) => mergeWith({}, v, { id }))
+      .sort((v1, v2) => v1.order < v2.order);
+    setVarList(newVarList)
+  }, [props.variables]);
+
   const addVar = () => {
+    let order = varList.length + 1;
     let newVar = {
-      id: uuid(),
-      name: `var${props.variables.length + 1}`,
+      name: `var${order}`,
       description: 'New variable',
       required: false,
       type: 'xpath',
-      value: ""
+      value: "",
+      order
     };
-    props.update({ variables: [newVar] })
+    props.update({ variables: { [uuid()]: newVar } })
   }
 
   return (
     <List className={classes.list}>
       {
-        props.variables.map(v => (
+        varList.map(v => (
           <React.Fragment key={v.id}>
             <ListItem button>
               <ListItemText primary={v.name} secondary={v.description} />

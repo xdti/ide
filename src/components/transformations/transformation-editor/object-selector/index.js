@@ -15,7 +15,7 @@ export default function ObjectSelector(props){
   const [objectType, setObjectType] = React.useState('vars');
 
   const objectSelectors = {
-    vars: <Variables variables={transformation.variables || []} update={props.update}/>
+    vars: <Variables variables={transformation.variables} update={props.update}/>
   }
 
   return (

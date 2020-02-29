@@ -23,16 +23,16 @@
     "o": 123456,
     "p": 123456
   },
-  "variables": [
-    {
-      "id": "bb9e2f1d-4d04-4753-b031-d65a15028d99",
+  "variables": {
+    "bb9e2f1d-4d04-4753-b031-d65a15028d99": {
       "name": "var1",
+      "order": 1,
       "description": "This is an example var",
       "type": "xpath",
       "value": "/Example/Var1/text()",
       "required": true
     }
-  ]
+  }
 },
 {
   "id": "test2",
