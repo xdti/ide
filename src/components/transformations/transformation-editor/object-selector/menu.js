@@ -8,10 +8,17 @@ import Tab from '@material-ui/core/Tab';
 const useStyles = makeStyles(theme => ({
   appBar: {
     width: 'fit-content',
-    zIndex: 1
+    zIndex: 1,
+    width: '8vw',
+    '& .MuiTabs-root': {
+      flexGrow: 1,
+      '& .MuiButtonBase-root': {
+        minWidth: 'unset'
+      }
+    }
   },
   toolbar: {
-    padding: 0,
+    padding: 0
   }
 }));
 

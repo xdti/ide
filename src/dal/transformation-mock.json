@@ -27,7 +27,7 @@
     "bb9e2f1d-4d04-4753-b031-d65a15028d99": {
       "name": "var1",
       "order": 1,
-      "description": "This is an example var",
+      "description": "This is an example var and i want it to overflow",
       "type": "xpath",
       "value": "/Example/Var1/text()",
       "required": true

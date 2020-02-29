@@ -16,8 +16,8 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#fafafa',
     boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
     padding: 0,
-    width: '200pt',
     overflowY: 'auto',
+    width: '15vw',
     '& .MuiListItemAvatar-root': {
       display: 'flex',
       justifyContent: 'flex-end'
@@ -28,6 +28,9 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: 'unset',
       margin: 0
     }
+  },
+  listItem: {
+    height: '55pt'
   },
   addVar: {
     justifyContent: 'center'
@@ -57,14 +60,15 @@ export default function Variables(props) {
     };
     props.update({ variables: { [uuid()]: newVar } })
   }
+  const selectVar = (id) => props.select(id, props.variables[id])
 
   return (
     <List className={classes.list}>
       {
         varList.map(v => (
           <React.Fragment key={v.id}>
-            <ListItem button>
-              <ListItemText primary={v.name} secondary={v.description} />
+            <ListItem button onClick={() => selectVar(v.id)} className={classes.listItem} title={v.name}>
+              <ListItemText primary={v.name} secondary={v.description} secondaryTypographyProps={{noWrap: true, title: v.description}}/>
               {
                 v.required ? (
                   <ListItemAvatar title="Required">

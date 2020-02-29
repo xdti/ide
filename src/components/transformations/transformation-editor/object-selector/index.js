@@ -6,6 +6,7 @@ import Variables from './variables';
 const useStyles = makeStyles(theme => ({
   container: {
     display: 'flex',
+    flexGrow: 1
   }
 }));
 
@@ -15,7 +16,7 @@ export default function ObjectSelector(props){
   const [objectType, setObjectType] = React.useState('vars');
 
   const objectSelectors = {
-    vars: <Variables variables={transformation.variables} update={props.update}/>
+    vars: <Variables variables={transformation.variables} update={props.update} select={props.select}/>
   }
 
   return (
