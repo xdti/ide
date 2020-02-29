@@ -7,7 +7,8 @@ import Tab from '@material-ui/core/Tab';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
-    width: 'fit-content'
+    width: 'fit-content',
+    zIndex: 1
   },
   toolbar: {
     padding: 0,
