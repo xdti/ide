@@ -27,20 +27,12 @@ export default function TransformationEditor(props) {
   const [error, setError] = React.useState(null);
 
   const updateStagingArea = (updates) => {
-    let newStagingArea = mergeWith({}, stagingArea, updates, (objValue, srcValue) => {
-      if (isArray(objValue)) {
-        return objValue.concat(srcValue);
-      }
-    });
+    let newStagingArea = mergeWith({}, stagingArea, updates);
     setStagingArea(newStagingArea);
   }
 
   React.useEffect(() => {
-    let newStagedTransformation = mergeWith({}, transformation, stagingArea, (objValue, srcValue) => {
-      if (isArray(objValue)) {
-        return objValue.concat(srcValue);
-      }
-    })
+    let newStagedTransformation = mergeWith({}, transformation, stagingArea);
     setStagedTransformation(newStagedTransformation);
   }, [transformation, stagingArea]);
 
