@@ -38,21 +38,28 @@ export default function TransformationEditor(props) {
   const [error, setError] = React.useState(null);
   const [varTypes, setVarTypes] = React.useState([]);
 
-  langTools.addCompleter({
-    name: 'variables-completer',
-    identifierRegexps: [/[^\s]+/],
-    getCompletions: (editor, session, pos, prefix, callback) => {
-      let currentVarName = editor.container.id;
-      let vars = Object.values(stagedTransformation.variables || {});
-      let varNames = vars.map(v => v.name);
-      callback(
-        null,
-        varNames
-          .filter(v => v.includes(prefix) && varNames.indexOf(v) < varNames.indexOf(currentVarName))
-          .map(value => ({ value, meta: "variable" }))
-      );
+  React.useEffect(() => {
+    langTools.addCompleter({
+      name: 'variables-completer',
+      identifierRegexps: [/[^\s]+/],
+      getCompletions: (editor, session, pos, prefix, callback) => {
+        let currentVarName = editor.container.id;
+        let vars = Object.values(stagedTransformation.variables || {});
+        let varNames = vars.map(v => v.name);
+        console.log(varNames, currentVarName);
+        callback(
+          null,
+          varNames
+            .filter(v => v.includes(prefix) && varNames.indexOf(v) < varNames.indexOf(currentVarName))
+            .map(value => ({ value, meta: "variable" }))
+        );
+      }
+    });
+    return () => {
+      console.log("removing completer");
+      langTools.setCompleters([langTools.snippetCompleter, langTools.textCompleter, langTools.keyWordCompleter])
     }
-  });
+  }, [stagedTransformation]);
 
   const addWindow = (id, type, data) => {
     let newWindows = merge({}, windows, { [id]: { type, data } });
