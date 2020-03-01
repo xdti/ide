@@ -33,7 +33,9 @@ const useStyles = makeStyles(theme => ({
     display: 'flex'
   },
 }));
-
+/*
+  TODO: fix router - currently always routes to transformations
+*/
 export default function App() {
   const classes = useStyles();
   return (
