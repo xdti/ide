@@ -70,6 +70,14 @@ export default function VariablePane(props) {
         value={props.data.name}
         onChange={(e) => update({ name: e.target.value })}
       />
+      <FormControl component="fieldset" className={classes.checkboxGroup}>
+        <FormGroup>
+          <FormControlLabel
+          control={<Checkbox checked={props.data.required} onChange={(e) => update({ required: e.target.checked })} value="required" />}
+          label="Required"
+          />
+        </FormGroup>
+      </FormControl>
       <TextField
         variant="outlined"
         label="Type"
@@ -83,14 +91,6 @@ export default function VariablePane(props) {
           ))
         }
       </TextField>
-      <FormControl component="fieldset" className={classes.checkboxGroup}>
-        <FormGroup>
-          <FormControlLabel
-            control={<Checkbox checked={props.data.required} onChange={(e) => update({ required: e.target.checked })} value="required" />}
-            label="Required"
-          />
-        </FormGroup>
-      </FormControl>
       {
         renderValueEditor[props.data.type]
       }
