@@ -9,16 +9,6 @@ import Header from './header';
 import ObjectSelector from './object-selector';
 import Windows from './windows';
 
-// const omitByDeep = (obj, cb) => {
-//   let res = omitBy(obj, cb);
-//   for (let key in res){
-//     if (isObject(res[key])){
-//       res[key] = omitByDeep(res[key], cb);
-//     }
-//   }
-//   return res;
-// }
-
 const useStyles = makeStyles(theme => ({
   container: {
     display: 'flex',
