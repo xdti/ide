@@ -11,7 +11,6 @@ import Windows from './windows';
 import langTools from "ace-builds/src-noconflict/ext-language_tools";
 /* TODO:
    1. Add editor tooltips
-   2. Make vars deletable
    3. Add input validation
 */
 const useStyles = makeStyles(theme => ({
