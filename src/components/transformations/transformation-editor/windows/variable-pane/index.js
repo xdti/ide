@@ -8,6 +8,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import XPathEditor from './xpath-editor'
+import ExpressionEditor from './expression-editor';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -49,6 +50,12 @@ export default function VariablePane(props) {
     xpath: (
       <XPathEditor
         config={props.varTypes.options.find(t => t.value === 'xpath')}
+        data={props.data}
+        update={update}
+      />
+    ),
+    expression: (
+      <ExpressionEditor
         data={props.data}
         update={update}
       />
