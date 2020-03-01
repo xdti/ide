@@ -1,6 +1,8 @@
 import React from 'react';
 import { v4 as uuid } from 'uuid';
 import mergeWith from 'lodash/mergeWith';
+import sortBy from 'lodash/sortBy';
+import reorderList from 'helpers/reorderList';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -10,6 +12,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Add from '@material-ui/icons/Add';
 import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
+import RootRef from "@material-ui/core/RootRef";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const useStyles = makeStyles(theme => ({
   list: {
@@ -38,19 +42,26 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const getItemStyle = (isDragging, draggableStyle) => ({
+  ...draggableStyle,
+
+  ...(isDragging && {
+    background: "rgb(235,235,235)"
+  })
+});
+
 export default function Variables(props) {
   const classes = useStyles();
   const [varList, setVarList] = React.useState([]);
   React.useEffect(() => {
     let variables = props.variables || {};
-    let newVarList = Object.entries(variables)
-      .map(([id, v]) => mergeWith({}, v, { id }))
-      .sort((v1, v2) => v1.order < v2.order);
+    let varsWithIds = Object.entries(variables).map(([id, v]) => mergeWith({}, v, { id }));
+    let newVarList = sortBy(varsWithIds, ['order'])
     setVarList(newVarList)
   }, [props.variables]);
 
   const addVar = () => {
-    let order = varList.length + 1;
+    let order = varList.length + 1
     let newVar = {
       name: `var${order}`,
       description: 'New variable',
@@ -60,39 +71,80 @@ export default function Variables(props) {
       order,
       ...props.varTypes.defaultProps
     };
-    props.update(uuid(), newVar)
+    props.update({[uuid()]: newVar})
   }
-  const selectVar = (id) => props.select(id, "var", props.variables[id])
+  const selectVar = (id) => props.select(id, "var", props.variables[id]);
+  const onDragEnd = (result) => {
+    if (!result.destination) {
+      return;
+    }
+
+    let sourceIndex = result.source.index;
+    let destinationIndex = result.destination.index;
+    let newVarList = reorderList(
+      varList,
+      sourceIndex,
+      destinationIndex
+    )
+    setVarList(newVarList);
+
+    let updates = {};
+    newVarList.forEach((v, i) => {
+      let order = i + 1
+      if (order !== props.variables[v.id].order){
+        updates[v.id] = { order };
+      }
+    });
+    props.update(updates);
+  }
 
   return (
-    <List className={classes.list}>
-      {
-        varList.map(v => (
-          <React.Fragment key={v.id}>
-            <ListItem button onClick={() => selectVar(v.id)} className={classes.listItem} title={v.name}>
-              <ListItemText
-                primary={v.name}
-                secondary={v.description}
-                secondaryTypographyProps={{ noWrap: true, title: v.description }}
-                primaryTypographyProps={{ noWrap: true, component: 'p' }}
-              />
-              {
-                v.required ? (
-                  <ListItemAvatar title="Required">
-                    <Avatar>*</Avatar>
-                  </ListItemAvatar>
-                ) : ""
-              }
-            </ListItem>
-            <Divider />
-          </React.Fragment>
-        ))
-      }
-      <ListItem button className={classes.addVar} onClick={addVar}>
-        <ListItemIcon>
-          <Add />
-        </ListItemIcon>
-      </ListItem>
-    </List>
+    <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="droppable">
+          {(provided, snapshot) => (
+            <List className={classes.list} ref={provided.innerRef}>
+              {varList.map((v, index) => (
+                <Draggable key={v.id} draggableId={v.id} index={index}>
+                  {(provided, snapshot) => (
+                    <ListItem
+                      button
+                      onClick={() => selectVar(v.id)}
+                      className={classes.listItem}
+                      title={v.name}
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      style={getItemStyle(
+                        snapshot.isDragging,
+                        provided.draggableProps.style
+                      )}
+                    >
+                      <ListItemText
+                        primary={v.name}
+                        secondary={v.description}
+                        secondaryTypographyProps={{ noWrap: true, title: v.description }}
+                        primaryTypographyProps={{ noWrap: true, component: 'p' }}
+                      />
+                      {
+                        v.required ? (
+                          <ListItemAvatar title="Required">
+                            <Avatar>*</Avatar>
+                          </ListItemAvatar>
+                        ) : ""
+                      }
+                    </ListItem>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+              <ListItem button className={classes.addVar} onClick={addVar}>
+                <ListItemIcon>
+                  <Add />
+                </ListItemIcon>
+              </ListItem>
+            </List>
+          )}
+        </Droppable>
+      </DragDropContext>
   );
 };

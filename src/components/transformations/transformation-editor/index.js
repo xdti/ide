@@ -68,7 +68,7 @@ export default function TransformationEditor(props) {
     setStagingArea(newStagingArea);
   }
   const stagingUpdaters = {
-    var: (id, updates) => updateStagingArea({ variables: { [id]: updates }})
+    var: (updates) => updateStagingArea({ variables: updates })
   }
 
   React.useEffect(() => {
@@ -101,7 +101,7 @@ export default function TransformationEditor(props) {
           closeWindow={closeWindow}
           update={(id, type, updates) => {
             updateWindow(id, updates)
-            stagingUpdaters[type](id, updates)
+            stagingUpdaters[type]({[id]: updates})
           }}
           varTypes={varTypes}
         />
