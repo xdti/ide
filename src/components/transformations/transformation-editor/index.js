@@ -9,10 +9,9 @@ import Header from './header';
 import ObjectSelector from './object-selector';
 import Windows from './windows';
 /* TODO:
-   1. Make variable list re-orderable
-   2. Add editor tooltips
-   3. Make vars deletable
-   4. Add input validation
+   1. Add editor tooltips
+   2. Make vars deletable
+   3. Add input validation
 */
 const useStyles = makeStyles(theme => ({
   container: {
