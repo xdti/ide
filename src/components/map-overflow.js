@@ -11,12 +11,16 @@ const useStyles = makeStyles(theme => ({
     '&>*': {
       display: 'flex',
       flexShrink: 0,
+      flexGrow: 0,
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
       paddingRight: 50
     },
   },
+  overflow: {
+    flexGrow: 1
+  }
 }));
 
 export default function MapOverflow(props) {
@@ -74,12 +78,13 @@ export default function MapOverflow(props) {
     <div ref={container} className={clsx(props.className, classes.container)}>
       {
         props.map.slice(0, valuesCount).map(m => (
-          <ListItemText key={m.key} primary={m.value} secondary={m.key} />
+          <ListItemText className={clsx(valuesCount < props.map.length && classes.overflow)} key={m.key} primary={m.value} secondary={m.key} />
         ))
       }
       {
         valuesCount < props.map.length ? (
           <ListItemText
+            className={classes.overflow}
             primary={<span style={{color: 'white'}}>.</span>}
             secondary={"......"}
             />
