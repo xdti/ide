@@ -3,6 +3,10 @@ import capitalize from 'lodash/capitalize';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 import XPathEditor from './xpath-editor'
 
 const useStyles = makeStyles(theme => ({
@@ -14,11 +18,14 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'flex-start',
     justifyContent: 'stretch',
     '&>.MuiTextField-root': {
-      width: '100%',
-      '&:not(:last-child)': {
-        marginBottom: 20
-      }
+      width: '100%'
+    },
+    '&>.MuiFormControl-root:not(:last-child)': {
+      marginBottom: 20,
     }
+  },
+  checkboxGroup: {
+    marginLeft: 10
   },
   pathEditor: {
     display: 'flex',
@@ -69,6 +76,14 @@ export default function VariablePane(props) {
           ))
         }
       </TextField>
+      <FormControl component="fieldset" className={classes.checkboxGroup}>
+        <FormGroup>
+          <FormControlLabel
+            control={<Checkbox checked={props.data.required} onChange={(e) => update({ required: e.target.checked })} value="required" />}
+            label="Required"
+          />
+        </FormGroup>
+      </FormControl>
       {
         renderValueEditor[props.data.type]
       }
