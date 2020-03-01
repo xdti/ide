@@ -70,6 +70,12 @@ export default function VariablePane(props) {
         value={props.data.name}
         onChange={(e) => update({ name: e.target.value })}
       />
+      <TextField
+        variant="outlined"
+        label="Description"
+        value={props.data.description}
+        onChange={(e) => update({ description: e.target.value })}
+      />
       <FormControl component="fieldset" className={classes.checkboxGroup}>
         <FormGroup>
           <FormControlLabel
