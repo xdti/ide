@@ -75,7 +75,13 @@ export default function MapOverflow(props) {
   });
 
   return (
-    <div ref={container} className={clsx(props.className, classes.container)}>
+    <div
+      ref={container}
+      className={clsx(props.className, classes.container)}
+      title={
+        props.map.map(m => `${m.key}: ${m.value}`).join('\n')
+      }
+    >
       {
         props.map.slice(0, valuesCount).map(m => (
           <ListItemText className={clsx(valuesCount < props.map.length && classes.overflow)} key={m.key} primary={m.value} secondary={m.key} />
