@@ -65,7 +65,7 @@ export default function XPathEditor(props) {
             className={classes.dataTypeInput}
           >
             {
-              props.config.dataTypes.filter(t => t.value !== 'list').map(o => (
+              props.config.dataTypes.filter(o => o !== 'list').map(o => (
                 <MenuItem key={o} value={o}>{o}</MenuItem>
               ))
             }
