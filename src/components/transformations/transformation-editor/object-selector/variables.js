@@ -10,6 +10,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Add from '@material-ui/icons/Add';
+import Menu from '@material-ui/icons/Menu';
 import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
 import RootRef from "@material-ui/core/RootRef";
@@ -113,12 +114,16 @@ export default function Variables(props) {
                       title={v.name}
                       ref={provided.innerRef}
                       {...provided.draggableProps}
-                      {...provided.dragHandleProps}
                       style={getItemStyle(
                         snapshot.isDragging,
                         provided.draggableProps.style
                       )}
                     >
+                      <ListItemIcon
+                        {...provided.dragHandleProps}
+                      >
+                        <Menu />
+                      </ListItemIcon>
                       <ListItemText
                         primary={v.name}
                         secondary={v.description}
