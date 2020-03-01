@@ -8,6 +8,7 @@ import dal from 'dal';
 import Header from './header';
 import ObjectSelector from './object-selector';
 import Windows from './windows';
+import langTools from "ace-builds/src-noconflict/ext-language_tools";
 /* TODO:
    1. Add editor tooltips
    2. Make vars deletable
@@ -36,6 +37,22 @@ export default function TransformationEditor(props) {
   const [previouslySelectedWindow, setPreviouslySelectedWindow] = React.useState(null);
   const [error, setError] = React.useState(null);
   const [varTypes, setVarTypes] = React.useState([]);
+
+  langTools.addCompleter({
+    name: 'variables-completer',
+    identifierRegexps: [/[^\s]+/],
+    getCompletions: (editor, session, pos, prefix, callback) => {
+      let currentVarName = editor.container.id;
+      let vars = Object.values(stagedTransformation.variables || {});
+      let varNames = vars.map(v => v.name);
+      callback(
+        null,
+        varNames
+          .filter(v => v.includes(prefix) && varNames.indexOf(v) < varNames.indexOf(currentVarName))
+          .map(value => ({ value, meta: "variable" }))
+      );
+    }
+  });
 
   const addWindow = (id, type, data) => {
     let newWindows = merge({}, windows, { [id]: { type, data } });

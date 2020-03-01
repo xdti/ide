@@ -17,7 +17,14 @@ export default function Windows(props) {
   const currentWindow = props.windows[props.selectedWindow];
 
   const windowPaneFactories = {
-    var: (id, w) => <VariablePane data={w.data} windowId={id} update={props.update} varTypes={props.varTypes}/>
+    var: (id, w) => (
+      <VariablePane
+        data={w.data}
+        windowId={id}
+        update={props.update}
+        varTypes={props.varTypes}
+      />
+    )
   }
 
   return (

@@ -5,7 +5,6 @@ import Typography from '@material-ui/core/Typography';
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-textmate";
-import "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/snippets/python.js";
 
 const useStyles = makeStyles(theme => ({
@@ -49,6 +48,7 @@ const useStyles = makeStyles(theme => ({
 export default function ExpressionEditor(props) {
   const classes = useStyles();
   const [isFocused, setIsFocused] = React.useState(false)
+
   return (
     <div
       className={clsx(classes.container, isFocused && classes.containerFocused)}
@@ -69,7 +69,7 @@ export default function ExpressionEditor(props) {
         height="unset"
         placeholder="Write expression code here..."
         className={classes.editor}
-        name="expression-value"
+        name={props.data.name}
         fontSize={'1rem'}
         wrapEnabled={true}
         editorProps={{
