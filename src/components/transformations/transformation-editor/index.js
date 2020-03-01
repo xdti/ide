@@ -46,7 +46,6 @@ export default function TransformationEditor(props) {
         let currentVarName = editor.container.id;
         let vars = Object.values(stagedTransformation.variables || {});
         let varNames = vars.map(v => v.name);
-        console.log(varNames, currentVarName);
         callback(
           null,
           varNames
@@ -67,7 +66,7 @@ export default function TransformationEditor(props) {
     setSelectedWindow(id);
   }
   const updateWindow = (id, updates) => {
-    let newWindows = merge({}, windows, { [id]: { data: updates }});
+    let newWindows = omitByDeep(merge({}, windows, { [id]: { data: updates }}), () => isNull(updates));
     setWindows(newWindows);
   }
   const closeWindow = (id) => {

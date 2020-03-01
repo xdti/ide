@@ -7,6 +7,8 @@ import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Button from '@material-ui/core/Button';
+import Delete from '@material-ui/icons/Delete';
 import XPathEditor from './xpath-editor'
 import ExpressionEditor from './expression-editor';
 
@@ -21,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     '&>.MuiTextField-root': {
       width: '100%'
     },
-    '&>.MuiFormControl-root:not(:last-child)': {
+    '&>*:not(:last-child)': {
       marginBottom: 20,
     }
   },
@@ -40,6 +42,11 @@ const useStyles = makeStyles(theme => ({
   },
   dataTypeInput: {
     width: '150pt'
+  },
+  actions: {
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'flex-end'
   }
 }));
 
@@ -79,7 +86,7 @@ export default function VariablePane(props) {
       <FormControl component="fieldset" className={classes.checkboxGroup}>
         <FormGroup>
           <FormControlLabel
-          control={<Checkbox checked={props.data.required} onChange={(e) => update({ required: e.target.checked })} value="required" />}
+          control={<Checkbox color="primary" checked={props.data.required} onChange={(e) => update({ required: e.target.checked })} value="required" />}
           label="Required"
           />
         </FormGroup>
@@ -100,6 +107,11 @@ export default function VariablePane(props) {
       {
         renderValueEditor[props.data.type]
       }
+      <div className={classes.actions}>
+        <Button variant="contained" color="secondary" title="Delete var" onClick={() => update(null)}>
+          <Delete/>
+        </Button>
+      </div>
     </div>
   );
 };
