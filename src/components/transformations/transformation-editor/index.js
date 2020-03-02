@@ -53,10 +53,11 @@ export default function TransformationEditor(props) {
         );
       }
     });
-    return () => {
-      console.log("removing completer");
-      langTools.setCompleters([langTools.snippetCompleter, langTools.textCompleter, langTools.keyWordCompleter])
-    }
+    return () => langTools.setCompleters([
+      langTools.snippetCompleter,
+      langTools.textCompleter,
+      langTools.keyWordCompleter
+    ]);
   }, [stagedTransformation]);
 
   const addWindow = (id, type, data) => {
