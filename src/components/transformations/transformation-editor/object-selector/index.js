@@ -31,7 +31,7 @@ export default function ObjectSelector(props){
     />,
     plugins: <Plugins
       plugins={transformation.plugins}
-      update={props.updaters.template}
+      update={props.updaters.plugin}
     />
   }
 

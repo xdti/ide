@@ -42,9 +42,7 @@
       "value": "<Example>\n\t\n</Example>"
     }
   },
-  "plugins": {
-    "api_requests": 1
-  }
+  "plugins": {}
 },
 {
   "id": "test2",

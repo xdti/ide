@@ -4,8 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
@@ -14,6 +12,7 @@ import Code from '@material-ui/icons/Code';
 import ArrowUpward from '@material-ui/icons/ArrowUpward';
 import Add from '@material-ui/icons/Add';
 import Divider from '@material-ui/core/Divider';
+import PluginSelector from './plugin-selector';
 
 const useStyles = makeStyles(theme => ({
   list: {
@@ -46,6 +45,8 @@ const useStyles = makeStyles(theme => ({
 export default function Variables(props) {
   const classes = useStyles();
   const [pluginList, setPluginsList] = React.useState([]);
+  const [showPluginSelector, setShowPluginSelector] = React.useState(false);
+
   React.useEffect(() => {
     let plugins = props.plugins || {};
     let pluginsWithVersion = Object.entries(plugins).map(([name, version]) => mergeWith({}, { name, version }));
@@ -80,11 +81,17 @@ export default function Variables(props) {
           <Divider />
         </React.Fragment>
       ))}
-      <ListItem button className={classes.addPlugin} onClick={addPlugin}>
+      <ListItem button className={classes.addPlugin} onClick={() => setShowPluginSelector(true)}>
         <ListItemIcon>
           <Add />
         </ListItemIcon>
       </ListItem>
+      <PluginSelector
+        open={showPluginSelector}
+        addPlugin={addPlugin}
+        existingPlugins={pluginList}
+        close={() => setShowPluginSelector(false)}
+      />
     </List>
   );
 };

@@ -11,4 +11,14 @@
       "code": "def ....mock"
     }
   ]
+},
+{
+  "name": "math",
+  "versions": [
+    {
+      "version": 1,
+      "configs": {},
+      "code": "def ....mock"
+    }
+  ]
 }]

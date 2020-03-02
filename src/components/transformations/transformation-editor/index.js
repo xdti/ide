@@ -96,7 +96,8 @@ export default function TransformationEditor(props) {
   }
   const stagingUpdaters = {
     var: (updates) => updateStagingArea({ variables: updates }),
-    template: (updates) => updateStagingArea({ templates: updates })
+    template: (updates) => updateStagingArea({ templates: updates }),
+    plugin: (updates) => updateStagingArea({ plugins: updates })
   }
 
   React.useEffect(() => {
