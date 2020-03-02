@@ -12,7 +12,8 @@ const useStyles = makeStyles(theme => ({
     '& .MuiTabs-root': {
       flexGrow: 1,
       '& .MuiButtonBase-root': {
-        minWidth: 'unset'
+        minWidth: 'unset',
+        maxWidth: 'unset'
       }
     }
   },
