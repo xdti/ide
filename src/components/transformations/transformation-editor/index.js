@@ -3,6 +3,7 @@ import merge from 'lodash/merge';
 import omitByDeep from 'helpers/omitByDeep';
 import isNull from 'lodash/isNull';
 import cloneDeep from 'lodash/cloneDeep';
+import sortBy from 'lodash/sortBy';
 import { makeStyles } from '@material-ui/core/styles';
 import dal from 'dal';
 import Header from './header';
@@ -43,7 +44,7 @@ export default function TransformationEditor(props) {
       identifierRegexps: [/[^\s]+/],
       getCompletions: (editor, session, pos, prefix, callback) => {
         let currentVarName = editor.container.id;
-        let vars = Object.values(stagedTransformation.variables || {});
+        let vars = sortBy(Object.values(stagedTransformation.variables || {}), ['order']);
         let varNames = vars.map(v => v.name);
         callback(
           null,
