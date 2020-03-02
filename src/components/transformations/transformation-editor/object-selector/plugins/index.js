@@ -54,6 +54,7 @@ export default function Variables(props) {
   }, [props.plugins]);
 
   const addPlugin = (name, version) => props.update({ [name]: version });
+  const removePlugin = (name) => props.update({ [name]: null });
 
   return (
     <List className={classes.list}>
@@ -73,7 +74,7 @@ export default function Variables(props) {
               <IconButton title="Update plugin">
                 <ArrowUpward />
               </IconButton>
-              <IconButton title="Delete plugin">
+              <IconButton title="Delete plugin" onClick={() => removePlugin(t.name)}>
                 <Delete />
               </IconButton>
             </ListItemSecondaryAction>
