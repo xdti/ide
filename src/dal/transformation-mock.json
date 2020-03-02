@@ -34,7 +34,17 @@
       "required": true
     }
   },
-  "templates": {}
+  "templates": {
+    "58a97d8a-efa9-4b87-b128-e4f196840991": {
+      "name": "template1",
+      "order": 1,
+      "description": "This is an example template",
+      "value": "<Example>\n\t\n</Example>"
+    }
+  },
+  "plugins": {
+    "api_requests": 1
+  }
 },
 {
   "id": "test2",

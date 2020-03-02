@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Menu from './menu';
 import Variables from './variables';
 import Templates from './templates';
+import Plugins from './plugins';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -27,6 +28,10 @@ export default function ObjectSelector(props){
       templates={transformation.templates}
       update={props.updaters.template}
       select={props.select}
+    />,
+    plugins: <Plugins
+      plugins={transformation.plugins}
+      update={props.updaters.template}
     />
   }
 

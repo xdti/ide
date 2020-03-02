@@ -1,0 +1,14 @@
+[{
+  "name": "api_requests",
+  "versions": [
+    {
+      "version": 1,
+      "configs": {
+        "baseUrl": "string",
+        "timeout": "int",
+        "raiseForStatusCode": "boolean"
+      },
+      "code": "def ....mock"
+    }
+  ]
+}]
