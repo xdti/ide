@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import AceEditor from "react-ace";
+import AceEditor from 'react-ace';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -56,9 +56,9 @@ export default function ExpressionEditor(props) {
         variant="body2"
         color="textSecondary"
         className={clsx(classes.title, isFocused && classes.titleFocused)}
-      >Expression</Typography>
+      >Template</Typography>
       <AceEditor
-        mode="python"
+        mode="django"
         theme="textmate"
         value={props.data.value}
         onChange={(value) => props.update({ value })}

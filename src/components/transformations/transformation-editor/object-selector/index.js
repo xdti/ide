@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Menu from './menu';
 import Variables from './variables';
+import Templates from './templates';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -20,6 +21,11 @@ export default function ObjectSelector(props){
       varTypes={props.varTypes}
       variables={transformation.variables}
       update={props.updaters.var}
+      select={props.select}
+    />,
+    templates: <Templates
+      templates={transformation.templates}
+      update={props.updaters.template}
       select={props.select}
     />
   }

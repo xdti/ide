@@ -9,6 +9,7 @@ import dal from 'dal';
 import Header from './header';
 import ObjectSelector from './object-selector';
 import Windows from './windows';
+import 'ace-builds/webpack-resolver';
 import langTools from "ace-builds/src-noconflict/ext-language_tools";
 /* TODO:
    1. Add editor tooltips
@@ -91,7 +92,8 @@ export default function TransformationEditor(props) {
     setStagingArea(newStagingArea);
   }
   const stagingUpdaters = {
-    var: (updates) => updateStagingArea({ variables: updates })
+    var: (updates) => updateStagingArea({ variables: updates }),
+    template: (updates) => updateStagingArea({ templates: updates })
   }
 
   React.useEffect(() => {

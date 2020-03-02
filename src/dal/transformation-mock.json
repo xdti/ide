@@ -33,7 +33,8 @@
       "dataType": "string",
       "required": true
     }
-  }
+  },
+  "templates": {}
 },
 {
   "id": "test2",

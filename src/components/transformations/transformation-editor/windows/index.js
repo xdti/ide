@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import WindowSelector from './window-selector';
 import VariablePane from './variable-pane';
+import TemplatePane from './template-pane';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -23,6 +24,13 @@ export default function Windows(props) {
         windowId={id}
         update={props.update}
         varTypes={props.varTypes}
+      />
+    ),
+    template: (id, w) => (
+      <TemplatePane
+        data={w.data}
+        windowId={id}
+        update={props.update}
       />
     )
   }
