@@ -107,37 +107,40 @@ export default function Variables(props) {
               {varList.map((v, index) => (
                 <Draggable key={v.id} draggableId={v.id} index={index}>
                   {(provided, snapshot) => (
-                    <ListItem
-                      button
-                      onClick={() => selectVar(v.id)}
-                      className={classes.listItem}
-                      title={v.name}
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      style={getItemStyle(
-                        snapshot.isDragging,
-                        provided.draggableProps.style
-                      )}
-                    >
-                      <ListItemIcon
-                        {...provided.dragHandleProps}
+                    <>
+                      <ListItem
+                        button
+                        onClick={() => selectVar(v.id)}
+                        className={classes.listItem}
+                        title={v.name}
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        style={getItemStyle(
+                          snapshot.isDragging,
+                          provided.draggableProps.style
+                        )}
                       >
-                        <Menu />
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={v.name}
-                        secondary={v.description}
-                        secondaryTypographyProps={{ noWrap: true, title: v.description }}
-                        primaryTypographyProps={{ noWrap: true, component: 'p' }}
-                      />
-                      {
-                        v.required ? (
-                          <ListItemAvatar title="Required">
-                            <Avatar>*</Avatar>
-                          </ListItemAvatar>
-                        ) : ""
-                      }
-                    </ListItem>
+                        <ListItemIcon
+                          {...provided.dragHandleProps}
+                        >
+                          <Menu />
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={v.name}
+                          secondary={v.description}
+                          secondaryTypographyProps={{ noWrap: true, title: v.description }}
+                          primaryTypographyProps={{ noWrap: true, component: 'p' }}
+                        />
+                        {
+                          v.required ? (
+                            <ListItemAvatar title="Required">
+                              <Avatar>*</Avatar>
+                            </ListItemAvatar>
+                          ) : ""
+                        }
+                      </ListItem>
+                      <Divider />
+                    </>
                   )}
                 </Draggable>
               ))}
