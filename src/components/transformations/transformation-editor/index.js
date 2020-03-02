@@ -44,13 +44,16 @@ export default function TransformationEditor(props) {
       name: 'variables-completer',
       identifierRegexps: [/[^\s]+/],
       getCompletions: (editor, session, pos, prefix, callback) => {
-        let currentVarName = editor.container.id;
+        let current = editor.container.id;
         let vars = sortBy(Object.values(stagedTransformation.variables || {}), ['order']);
         let varNames = vars.map(v => v.name);
+        let isVar = varNames.includes(current);
         callback(
           null,
           varNames
-            .filter(v => v.includes(prefix) && varNames.indexOf(v) < varNames.indexOf(currentVarName))
+            .filter(v => {
+              return v.includes(prefix) && (!isVar || varNames.indexOf(v) < varNames.indexOf(current))
+            })
             .map(value => ({ value, meta: "variable" }))
         );
       }
