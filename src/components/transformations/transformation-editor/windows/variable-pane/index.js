@@ -1,5 +1,4 @@
 import React from 'react';
-import capitalize from 'lodash/capitalize';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';

@@ -13,7 +13,6 @@ import Add from '@material-ui/icons/Add';
 import Menu from '@material-ui/icons/Menu';
 import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
-import RootRef from "@material-ui/core/RootRef";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const useStyles = makeStyles(theme => ({
