@@ -30,6 +30,10 @@ const useStyles = makeStyles(theme => ({
       flexDirection: 'row',
       justifyContent: 'space-between',
       width: '150pt'
+    },
+    '& .MuiTab-root': {
+      borderTopRightRadius: '10px',
+      borderRight: '1px solid rgba(0, 0, 0, 0.23)'
     }
   },
   closeButton: {
