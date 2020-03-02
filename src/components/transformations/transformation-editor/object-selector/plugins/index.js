@@ -13,6 +13,7 @@ import ArrowUpward from '@material-ui/icons/ArrowUpward';
 import Add from '@material-ui/icons/Add';
 import Divider from '@material-ui/core/Divider';
 import PluginSelector from './plugin-selector';
+import dal from 'dal';
 
 const useStyles = makeStyles(theme => ({
   list: {
@@ -55,6 +56,7 @@ export default function Variables(props) {
 
   const addPlugin = (name, version) => props.update({ [name]: version });
   const removePlugin = (name) => props.update({ [name]: null });
+  const updatePlugin = (name) => dal.plugins.getLatestVersion(name).then(v => props.update({ [name]: v }));
 
   return (
     <List className={classes.list}>
@@ -71,7 +73,7 @@ export default function Variables(props) {
               primaryTypographyProps={{ noWrap: true, component: 'p' }}
             />
             <ListItemSecondaryAction>
-              <IconButton title="Update plugin">
+              <IconButton title="Update plugin" onClick={() => updatePlugin(t.name)}>
                 <ArrowUpward />
               </IconButton>
               <IconButton title="Delete plugin" onClick={() => removePlugin(t.name)}>
