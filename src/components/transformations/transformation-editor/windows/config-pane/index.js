@@ -1,4 +1,5 @@
 import React from 'react';
+import isUndefined from 'lodash/isUndefined';
 import { makeStyles } from '@material-ui/core/styles';
 import GeneralConfig from './general-config';
 import PluginConfig from './plugin-config';
@@ -14,17 +15,19 @@ export default function ConfigPane(props) {
   return (
     <>
     {
-      props.data.name === "general" ? (
+      isUndefined(props.pluginVersion) ? (
         <GeneralConfig
           data={props.data}
-          windowId={props.id}
+          config={props.config}
+          windowId={props.windowId}
           update={update}
         />
       ) : (
         <PluginConfig
           data={props.data}
-          windowId={props.id}
+          windowId={props.windowId}
           update={update}
+          pluginVersion={props.pluginVersion}
         />
       )
     }

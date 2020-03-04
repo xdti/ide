@@ -33,19 +33,22 @@ const useStyles = makeStyles(theme => ({
 
 export default function PluginConfig(props) {
   const classes = useStyles();
-  const config = props.data.values || {};
+  const config = props.data || {};
   const [pluginConfig, setPluginConfig] = React.useState({});
   const [error, setError] = React.useState(null);
 
   React.useEffect(() => {
-    dal.plugins.getPluginConfig(props.data.name, props.data.version).then(setPluginConfig).catch(setError)
-  }, [props.data.name, props.data.version]);
+    dal.plugins.getPluginConfig(props.windowId, props.pluginVersion)
+      .then(setPluginConfig)
+      .catch(setError)
+  }, [props.pluginVersion, props.windowId]);
 
   return (
     <div className={classes.container}>
       {
         Object.entries(pluginConfig).map(([k, type]) => (
           <TextField
+            key={k}
             variant="outlined"
             label={startCase(k)}
             value={config[k]}

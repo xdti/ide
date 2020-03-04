@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function GeneralConfig(props) {
   const classes = useStyles();
-  const config = props.data.values || {};
+  const config = props.data || {};
   const [newConfigKey, setNewConfigKey] = React.useState("");
   const [newConfigValue, setNewConfigValue] = React.useState("");
 

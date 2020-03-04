@@ -43,7 +43,7 @@ export default function Config(props) {
     setPluginsList(pluginsWithVersion)
   }, [props.plugins]);
 
-  const selectConfig = (name, version) => props.select(name, "config", { name, version, values: props.config[name] });
+  const selectConfig = (name, version) => props.select(name, "config");
 
   return (
     <List className={classes.list}>

@@ -19,24 +19,25 @@ export default function Windows(props) {
   const currentWindow = props.windows[props.selectedWindow];
 
   const windowPaneFactories = {
-    var: (id, w) => (
+    var: (id) => (
       <VariablePane
-        data={w.data}
+        data={props.transformation.variables[id]}
         windowId={id}
         update={props.update}
         varTypes={props.varTypes}
       />
     ),
-    template: (id, w) => (
+    template: (id) => (
       <TemplatePane
-        data={w.data}
+        data={props.transformation.templates[id]}
         windowId={id}
         update={props.update}
       />
     ),
-    config: (id, w) => (
+    config: (id) => (
       <ConfigPane
-        data={w.data}
+        data={props.transformation.config[id]}
+        pluginVersion={props.transformation.plugins[id]}
         windowId={id}
         update={props.update}
       />
@@ -50,6 +51,7 @@ export default function Windows(props) {
         windows={props.windows}
         selectWindow={props.selectWindow}
         closeWindow={props.closeWindow}
+        transformation={props.transformation}
       />
       {
         currentWindow ? windowPaneFactories[currentWindow.type](props.selectedWindow, currentWindow) : ""

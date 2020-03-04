@@ -48,6 +48,16 @@ const useStyles = makeStyles(theme => ({
 
 export default function WindowSelector(props) {
   const classes = useStyles();
+  const getTabName = (id, w) => {
+    switch(w.type){
+      case "var":
+        return props.transformation.variables[id].name;
+      case "template":
+        return props.transformation.templates[id].name
+      case "config":
+        return id
+    }
+  }
   const renderCloseButton = (id) => (
     <IconButton className={classes.closeButton} onClick={(e) => {
       e.stopPropagation();
@@ -76,7 +86,7 @@ export default function WindowSelector(props) {
                 key={id}
                 label={<>
                   <div className={classes.tabTitle}>
-                    <Typography noWrap={true}>{w.data.name}</Typography>
+                    <Typography noWrap={true}>{getTabName(id, w)}</Typography>
                     <Typography noWrap={true} variant="caption" color="textSecondary">{w.type}</Typography>
                   </div>
                   {renderCloseButton(id)}

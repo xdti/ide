@@ -74,7 +74,7 @@ export default function Variables(props) {
     };
     props.update({[uuid()]: newVar})
   }
-  const selectVar = (id) => props.select(id, "var", props.variables[id]);
+  const selectVar = (id) => props.select(id, "var");
   const onDragEnd = (result) => {
     if (!result.destination) {
       return;

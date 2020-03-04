@@ -65,27 +65,10 @@ export default function TransformationEditor(props) {
     ]);
   }, [stagedTransformation]);
 
-  const addWindow = (id, type, data) => {
-    let newWindows = merge({}, windows, { [id]: { type, data } });
+  const addWindow = (id, type) => {
+    let newWindows = merge({}, windows, { [id]: { type } });
     setWindows(newWindows);
     setSelectedWindow(id);
-  }
-  const updateWindow = (id, updates) => {
-    let newWindows = omitByDeep(merge({}, windows, { [id]: { data: updates }}), () => isNull(updates));
-    setWindows(newWindows);
-  }
-
-  const windowUpdaters = {
-    default: updateWindow,
-    config: (id, updates) => {
-      let newWindows = omitByDeep(
-        omitByDeep(
-          merge({}, windows, { [id]: { data: { values: updates } } }),
-          () => isNull(updates)
-        ), isNull
-      );
-      setWindows(newWindows);
-    }
   }
 
   const closeWindow = (id) => {
@@ -143,10 +126,8 @@ export default function TransformationEditor(props) {
           selectedWindow={selectedWindow}
           selectWindow={selectWindow}
           closeWindow={closeWindow}
-          update={(id, type, updates) => {
-            (windowUpdaters[type] || windowUpdaters['default'])(id, updates)
-            stagingUpdaters[type]({[id]: updates})
-          }}
+          update={(id, type, updates) => stagingUpdaters[type]({[id]: updates})}
+          transformation={stagedTransformation}
           varTypes={varTypes}
         />
       </div>

@@ -69,7 +69,7 @@ export default function Templates(props) {
     };
     props.update({[uuid()]: newTemplate})
   }
-  const selectTemplate = (id) => props.select(id, "template", props.templates[id]);
+  const selectTemplate = (id) => props.select(id, "template");
   const onDragEnd = (result) => {
     if (!result.destination) {
       return;
