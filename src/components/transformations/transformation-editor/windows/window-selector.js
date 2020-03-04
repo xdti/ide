@@ -36,8 +36,13 @@ const useStyles = makeStyles(theme => ({
       borderRight: '1px solid rgba(0, 0, 0, 0.23)'
     }
   },
+  tabTitle: {
+    width: '135pt',
+    textAlign: 'left'
+  },
   closeButton: {
-    padding: 0
+    padding: 0,
+    width: '15pt'
   }
 }));
 
@@ -69,7 +74,13 @@ export default function WindowSelector(props) {
               <Tab
                 component="div"
                 key={id}
-                label={<><Typography noWrap={true}>{w.data.name}</Typography>{renderCloseButton(id)}</>}
+                label={<>
+                  <div className={classes.tabTitle}>
+                    <Typography noWrap={true}>{w.data.name}</Typography>
+                    <Typography noWrap={true} variant="caption" color="textSecondary">{w.type}</Typography>
+                  </div>
+                  {renderCloseButton(id)}
+                </>}
                 id={id}
                 aria-controls={id}
                 value={id}
