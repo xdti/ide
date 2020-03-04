@@ -1,4 +1,5 @@
 import React from 'react';
+import startCase from 'lodash/startCase';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import ToolBar from '@material-ui/core/ToolBar';
@@ -87,7 +88,7 @@ export default function WindowSelector(props) {
                 label={<>
                   <div className={classes.tabTitle}>
                     <Typography noWrap={true}>{getTabName(id, w)}</Typography>
-                    <Typography noWrap={true} variant="caption" color="textSecondary">{w.type}</Typography>
+                    <Typography noWrap={true} variant="caption" color="textSecondary">{startCase(w.type)}</Typography>
                   </div>
                   {renderCloseButton(id)}
                 </>}
