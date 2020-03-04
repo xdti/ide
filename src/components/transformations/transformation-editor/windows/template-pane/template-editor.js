@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ExpressionEditor(props) {
+export default function TemplateEditor(props) {
   const classes = useStyles();
   const [isFocused, setIsFocused] = React.useState(false)
 

@@ -49,7 +49,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   })
 });
 
-export default function Variables(props) {
+export default function Templates(props) {
   const classes = useStyles();
   const [templateList, setTemplateList] = React.useState([]);
   React.useEffect(() => {

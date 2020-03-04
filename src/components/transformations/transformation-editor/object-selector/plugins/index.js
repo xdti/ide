@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Variables(props) {
+export default function Plugins(props) {
   const classes = useStyles();
   const [pluginList, setPluginsList] = React.useState([]);
   const [showPluginSelector, setShowPluginSelector] = React.useState(false);

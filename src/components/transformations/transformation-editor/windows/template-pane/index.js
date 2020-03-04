@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function VariablePane(props) {
+export default function TemplatePane(props) {
   const classes = useStyles();
   const update = (updates) => props.update(props.windowId, "template", updates);
 
