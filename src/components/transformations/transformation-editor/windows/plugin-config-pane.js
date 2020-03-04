@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import startCase from 'lodash/startCase';
+import isUndefined from 'lodash/isUndefined';
 import TextField from '@material-ui/core/TextField';
 import dal from 'dal';
 
@@ -31,11 +32,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function PluginConfig(props) {
+export default function PluginConfigPane(props) {
+  if (isUndefined(props.pluginVersion)){
+    props.closeSelf();
+  }
   const classes = useStyles();
   const config = props.data || {};
   const [pluginConfig, setPluginConfig] = React.useState({});
   const [error, setError] = React.useState(null);
+
+  const update = (updates) => props.update(props.windowId, "config", updates);
 
   React.useEffect(() => {
     dal.plugins.getPluginConfig(props.windowId, props.pluginVersion)
@@ -52,7 +58,7 @@ export default function PluginConfig(props) {
             variant="outlined"
             label={startCase(k)}
             value={config[k]}
-            onChange={(e) => props.update({ [k]: e.target.value })}
+            onChange={(e) => update({ [k]: e.target.value })}
           />
         ))
       }

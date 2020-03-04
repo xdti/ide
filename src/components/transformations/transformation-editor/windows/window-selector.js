@@ -54,7 +54,7 @@ export default function WindowSelector(props) {
         return props.transformation.variables[id].name;
       case "template":
         return props.transformation.templates[id].name
-      case "config":
+      default:
         return id
     }
   }

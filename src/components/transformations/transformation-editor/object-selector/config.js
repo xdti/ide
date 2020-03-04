@@ -43,11 +43,12 @@ export default function Config(props) {
     setPluginsList(pluginsWithVersion)
   }, [props.plugins]);
 
-  const selectConfig = (name, version) => props.select(name, "config");
+  const selectPluginConfig = (name, version) => props.select(name, "pluginConfig");
+  const selectGeneralConfig = () => props.select("General", "generalConfig");
 
   return (
     <List className={classes.list}>
-      <ListItem className={classes.listItem} title="General" onClick={() => selectConfig("general")} button>
+      <ListItem className={classes.listItem} title="General" onClick={() => selectGeneralConfig()} button>
         <ListItemIcon>
           <Settings />
         </ListItemIcon>
@@ -61,7 +62,7 @@ export default function Config(props) {
       }
       {pluginList.map((t, index) => (
         <React.Fragment key={t.name}>
-          <ListItem className={classes.listItem} title={t.name} onClick={() => selectConfig(t.name, t.version)} button>
+          <ListItem className={classes.listItem} title={t.name} onClick={() => selectPluginConfig(t.name, t.version)} button>
             <ListItemIcon>
               <Settings />
             </ListItemIcon>

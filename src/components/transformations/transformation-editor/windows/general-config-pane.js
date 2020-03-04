@@ -33,14 +33,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function GeneralConfig(props) {
+export default function GeneralConfigPane(props) {
   const classes = useStyles();
   const config = props.data || {};
   const [newConfigKey, setNewConfigKey] = React.useState("");
   const [newConfigValue, setNewConfigValue] = React.useState("");
 
+  const update = (updates) => props.update(props.windowId, "config", updates);
+
   const addNewConfig = () => {
-    props.update({ [newConfigKey]: newConfigValue });
+    update({ [newConfigKey]: newConfigValue });
     setNewConfigKey("");
     setNewConfigValue("");
   }
@@ -51,7 +53,7 @@ export default function GeneralConfig(props) {
         variant="outlined"
         label="Template Selector"
         value={config.templateSelector || ""}
-        onChange={(e) => props.update({ templateSelector: e.target.value })}
+        onChange={(e) => update({ templateSelector: e.target.value })}
       />
       {
         Object.keys(config).filter(k => k !== 'templateSelector').map(k => (

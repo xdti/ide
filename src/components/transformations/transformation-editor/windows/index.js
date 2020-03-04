@@ -3,7 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import WindowSelector from './window-selector';
 import VariablePane from './variable-pane';
 import TemplatePane from './template-pane';
-import ConfigPane from './config-pane';
+import GeneralConfigPane from './general-config-pane';
+import PluginConfigPane from './plugin-config-pane';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -34,11 +35,19 @@ export default function Windows(props) {
         update={props.update}
       />
     ),
-    config: (id) => (
-      <ConfigPane
+    generalConfig: (id) => (
+      <GeneralConfigPane
+        data={props.transformation.config[id]}
+        windowId={id}
+        update={props.update}
+      />
+    ),
+    pluginConfig: (id) => (
+      <PluginConfigPane
         data={props.transformation.config[id]}
         pluginVersion={props.transformation.plugins[id]}
         windowId={id}
+        closeSelf={() => props.closeWindow(id)}
         update={props.update}
       />
     )
