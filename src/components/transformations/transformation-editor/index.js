@@ -12,8 +12,10 @@ import Windows from './windows';
 import 'ace-builds/webpack-resolver';
 import langTools from "ace-builds/src-noconflict/ext-language_tools";
 /* TODO:
-   1. Add editor tooltips
-   3. Add input validation
+   1. In plugin config pane, change input type according to config value type specified in plugin config
+   2. Add version control
+   3. Add editor tooltips
+   4. Add input validation
 */
 const useStyles = makeStyles(theme => ({
   container: {
