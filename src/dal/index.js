@@ -32,6 +32,6 @@ export default {
   plugins: {
     getPluginList: async () => plugins,
     getLatestVersion: async (name) => sortBy(plugins.find(p => p.name === name).versions, ['version']).pop().version,
-    getPluginConfig: async (name, version) => plugins.find(p => p.name === name).versions.find(v => v.version === version)
+    getPluginConfig: async (name, version) => plugins.find(p => p.name === name).versions.find(v => v.version === version).configs
   }
 }

@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import WindowSelector from './window-selector';
 import VariablePane from './variable-pane';
 import TemplatePane from './template-pane';
+import ConfigPane from './config-pane';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -28,6 +29,13 @@ export default function Windows(props) {
     ),
     template: (id, w) => (
       <TemplatePane
+        data={w.data}
+        windowId={id}
+        update={props.update}
+      />
+    ),
+    config: (id, w) => (
+      <ConfigPane
         data={w.data}
         windowId={id}
         update={props.update}

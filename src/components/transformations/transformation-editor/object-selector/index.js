@@ -4,6 +4,7 @@ import Menu from './menu';
 import Variables from './variables';
 import Templates from './templates';
 import Plugins from './plugins';
+import Config from './config';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -32,6 +33,11 @@ export default function ObjectSelector(props){
     plugins: <Plugins
       plugins={transformation.plugins}
       update={props.updaters.plugin}
+    />,
+    config: <Config
+      config={transformation.config}
+      plugins={transformation.plugins}
+      select={props.select}
     />
   }
 

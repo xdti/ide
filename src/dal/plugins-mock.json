@@ -17,12 +17,17 @@
   "versions": [
     {
       "version": 1,
-      "configs": {},
+      "configs": {
+        "delay": "int"
+      },
       "code": "def ....mock"
     },
     {
       "version": 2,
-      "configs": {},
+      "configs": {
+        "delay": "int",
+        "throw": "boolean"
+      },
       "code": "def ....mock"
     }
   ]

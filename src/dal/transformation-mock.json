@@ -42,7 +42,8 @@
       "value": "<Example>\n\t\n</Example>"
     }
   },
-  "plugins": {}
+  "plugins": {},
+  "config": {}
 },
 {
   "id": "test2",

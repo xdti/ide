@@ -74,6 +74,20 @@ export default function TransformationEditor(props) {
     let newWindows = omitByDeep(merge({}, windows, { [id]: { data: updates }}), () => isNull(updates));
     setWindows(newWindows);
   }
+
+  const windowUpdaters = {
+    default: updateWindow,
+    config: (id, updates) => {
+      let newWindows = omitByDeep(
+        omitByDeep(
+          merge({}, windows, { [id]: { data: { values: updates } } }),
+          () => isNull(updates)
+        ), isNull
+      );
+      setWindows(newWindows);
+    }
+  }
+
   const closeWindow = (id) => {
     let newWindows = cloneDeep(windows);
     delete newWindows[id];
@@ -97,7 +111,8 @@ export default function TransformationEditor(props) {
   const stagingUpdaters = {
     var: (updates) => updateStagingArea({ variables: updates }),
     template: (updates) => updateStagingArea({ templates: updates }),
-    plugin: (updates) => updateStagingArea({ plugins: updates })
+    plugin: (updates) => updateStagingArea({ plugins: updates }),
+    config: (updates) => updateStagingArea({ config: updates })
   }
 
   React.useEffect(() => {
@@ -129,7 +144,7 @@ export default function TransformationEditor(props) {
           selectWindow={selectWindow}
           closeWindow={closeWindow}
           update={(id, type, updates) => {
-            updateWindow(id, updates)
+            (windowUpdaters[type] || windowUpdaters['default'])(id, updates)
             stagingUpdaters[type]({[id]: updates})
           }}
           varTypes={varTypes}
