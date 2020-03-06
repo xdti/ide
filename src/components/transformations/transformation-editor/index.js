@@ -5,10 +5,12 @@ import isNull from 'lodash/isNull';
 import cloneDeep from 'lodash/cloneDeep';
 import sortBy from 'lodash/sortBy';
 import { makeStyles } from '@material-ui/core/styles';
-import dal from 'dal';
 import Header from './header';
 import ObjectSelector from './object-selector';
 import Windows from './windows';
+import VersionControl from './version-control';
+import Footer from './footer';
+import dal from 'dal';
 import 'ace-builds/webpack-resolver';
 import langTools from "ace-builds/src-noconflict/ext-language_tools";
 /* TODO:
@@ -40,6 +42,7 @@ export default function TransformationEditor(props) {
   const [previouslySelectedWindow, setPreviouslySelectedWindow] = React.useState(null);
   const [error, setError] = React.useState(null);
   const [varTypes, setVarTypes] = React.useState([]);
+  const [showVersionControl, setShowVersionControl] = React.useState(true);
 
   React.useEffect(() => {
     langTools.addCompleter({
@@ -107,7 +110,7 @@ export default function TransformationEditor(props) {
 
   React.useEffect(() => {
     dal.transformations.getVarTypesByInput(transformation.input).then(setVarTypes).catch(setError)
-  }, [transformation]);
+  }, [transformation.input]);
 
   React.useEffect(() => {
     dal.transformations.get(props.transformationId).then(setTransformation).catch(setError)
@@ -131,8 +134,17 @@ export default function TransformationEditor(props) {
           update={(id, type, updates) => stagingUpdaters[type]({[id]: updates})}
           transformation={stagedTransformation}
           varTypes={varTypes}
+          small={showVersionControl}
         />
+        {
+          showVersionControl ? (
+            <VersionControl close={() => setShowVersionControl(false)}/>
+          ) : ""
+        }
       </div>
+      <Footer
+        showVersionControl={() => setShowVersionControl(true)}
+      />
     </div>
   );
 };

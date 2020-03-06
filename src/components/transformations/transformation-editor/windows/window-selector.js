@@ -13,17 +13,17 @@ const useStyles = makeStyles(theme => ({
   appBar: {
     zIndex: 1,
     height: 'calc(55pt + 1px)',
-    width: '77vw',
+    width: 'inherit',
     backgroundColor: '#fafafa',
   },
   toolbar: {
     padding: 0,
-    width: '77vw',
+    width: 'inherit',
   },
   tabs: {
     minHeight: 'inherit',
     height: 'calc(55pt + 1px)',
-    width: '77vw',
+    width: 'inherit',
     '& .MuiTabs-scroller': {
       display: 'flex'
     },

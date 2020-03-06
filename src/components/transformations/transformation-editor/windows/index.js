@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
 import WindowSelector from './window-selector';
 import VariablePane from './variable-pane';
 import TemplatePane from './template-pane';
@@ -11,7 +12,10 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexShrink: 0,
     width: '77vw',
-    flexDirection: 'column'
+    flexDirection: 'column',
+  },
+  containerSmall: {
+    width: '57vw',
   }
 }));
 
@@ -54,7 +58,7 @@ export default function Windows(props) {
   }
 
   return (
-    <div className={classes.container}>
+    <div className={clsx(classes.container, props.small && classes.containerSmall)}>
       <WindowSelector
         selectedWindow={props.selectedWindow}
         windows={props.windows}
