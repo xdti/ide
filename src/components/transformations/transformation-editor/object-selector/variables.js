@@ -62,7 +62,7 @@ export default function Variables(props) {
   }, [props.variables]);
 
   const addVar = () => {
-    let order = varList.length + 1
+    let order = ++varList.length;
     let newVar = {
       name: `var${order}`,
       description: 'New variable',

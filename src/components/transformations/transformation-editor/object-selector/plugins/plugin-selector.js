@@ -75,7 +75,7 @@ export default function PluginSelector(props) {
           variant="outlined"
           label="Version"
           value={selectedVersion}
-          disabled={selectedPlugin == ""}
+          disabled={selectedPlugin === ""}
           onChange={(e) => setSelectedVersion(e.target.value)}
         >
         {
