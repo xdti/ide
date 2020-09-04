@@ -107,7 +107,10 @@ export default function VariablePane(props) {
         renderValueEditor[props.data.type]
       }
       <div className={classes.actions}>
-        <Button variant="contained" color="secondary" title="Delete var" onClick={() => update(null)}>
+        <Button variant="contained" color="secondary" title="Delete var" onClick={() => {
+          props.closeSelf();
+          update(null);
+        }}>
           <Delete/>
         </Button>
       </div>
