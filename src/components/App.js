@@ -33,9 +33,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex'
   },
 }));
-/*
-  TODO: fix router - currently always routes to transformations
-*/
+
 export default function App() {
   const classes = useStyles();
   return (
@@ -46,7 +44,7 @@ export default function App() {
         <main className={classes.content}>
           <Switch>
             {
-              displays.map(d => (
+              displays.slice().reverse().map(d => (
                 <Route key={d.route} exact path={d.route}>
                   {d.display}
                 </Route>
