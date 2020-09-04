@@ -29,6 +29,7 @@ export default function Windows(props) {
         data={props.transformation.variables[id]}
         windowId={id}
         update={props.update}
+        closeSelf={() => props.closeWindow(id)}
         varTypes={props.varTypes}
       />
     ),
@@ -37,6 +38,7 @@ export default function Windows(props) {
         data={props.transformation.templates[id]}
         windowId={id}
         update={props.update}
+        closeSelf={() => props.closeWindow(id)}
       />
     ),
     generalConfig: (id) => (
