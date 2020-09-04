@@ -50,7 +50,10 @@ export default function TemplatePane(props) {
         update={update}
       />
       <div className={classes.actions}>
-        <Button variant="contained" color="secondary" title="Delete template" onClick={() => update(null)}>
+        <Button variant="contained" color="secondary" title="Delete template" onClick={() => {
+          props.closeSelf();
+          update(null);
+        }}>
           <Delete/>
         </Button>
       </div>
