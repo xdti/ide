@@ -11,7 +11,13 @@ import ArrowForward from '@material-ui/icons/ArrowForward';
 const useStyles = makeStyles(theme => ({
   valueDiff: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    overflow: 'hidden',
+    '&>span': {
+      overflow: 'hidden',
+      whiteSpace: 'nowrap',
+      textOverflow: 'ellipsis'
+    }
   },
   identity: {
     display: 'flex',
@@ -45,7 +51,8 @@ const useStyles = makeStyles(theme => ({
   },
   changes: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    overflow: 'hidden'
   },
   container: {
     display: 'flex',
@@ -74,9 +81,9 @@ export default function Diff(props) {
       {
         props.diff.changeType === 'changed' ? (
           <div className={classes.valueDiff}>
-            <Typography variant="caption">{props.diff.oldValue.toString()}</Typography>
+            <Typography title={props.diff.oldValue.toString()} variant="caption">{props.diff.oldValue.toString()}</Typography>
             <ArrowForward fontSize="small"/>
-            <Typography variant="caption">{props.diff.newValue.toString()}</Typography>
+            <Typography variant="caption" title={props.diff.newValue.toString()}>{props.diff.newValue.toString()}</Typography>
           </div>
         ) : props.diff.entityName
       }
