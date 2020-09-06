@@ -156,7 +156,7 @@ export default function TransformationEditor(props) {
         }
       </div>
       <Footer
-        showVersionControl={() => setShowVersionControl(true)}
+        showVersionControl={() => setShowVersionControl(!showVersionControl)}
       />
     </div>
   );
