@@ -162,7 +162,7 @@ const pluginDiff = (stagingArea, transformation) => {
       diff.push({
         id: uuid(),
         changeType: 'changed',
-        entityType: `config.version`,
+        entityType: `plugin.version`,
         entityName: key,
         newValue, oldValue: transformation.plugins[key]
       })
