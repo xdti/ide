@@ -23,7 +23,8 @@ import langTools from "ace-builds/src-noconflict/ext-language_tools";
     f. resolve conflicts
    4. Edit transformation metadata
    5. Add editor tooltips
-   7. Add input validation
+   6. Add input validation
+   7. Add auto complete for templates, plugins and general config
 */
 const useStyles = makeStyles(theme => ({
   container: {

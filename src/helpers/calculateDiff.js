@@ -29,7 +29,7 @@ const variablesDiff = (stagingArea, transformation) => {
             id: uuid(),
             changeType: 'changed',
             entityType: `variable.${vkey}`,
-            entityName: variable.name,
+            entityName: variable.name || transformation.variables[key].name,
             newValue, oldValue
           })
         }
@@ -69,7 +69,7 @@ const templatesDiff = (stagingArea, transformation) => {
             id: uuid(),
             changeType: 'changed',
             entityType: `template.${vkey}`,
-            entityName: template.name,
+            entityName: template.name || transformation.templates[key].name,
             newValue, oldValue
           })
         }
