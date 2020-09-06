@@ -45,6 +45,7 @@ const useStyles = makeStyles(theme => ({
 export default function TemplateEditor(props) {
   const classes = useStyles();
   const [isFocused, setIsFocused] = React.useState(false)
+  const [value, setValue] = React.useState(props.data.value)
 
   return (
     <div
@@ -60,14 +61,18 @@ export default function TemplateEditor(props) {
       <AceEditor
         mode="django"
         theme="textmate"
-        value={props.data.value}
-        onChange={(value) => props.update({ value })}
+        value={value}
+        onChange={(value) => {
+          setValue(value)
+          props.update({ value })
+        }}
         width="100%"
         height="unset"
         placeholder="Write expression code here..."
         className={classes.editor}
         name={props.data.name}
         fontSize={'1rem'}
+        debounceChangePeriod={500}
         wrapEnabled={true}
         editorProps={{
           className: classes.editor
