@@ -16,18 +16,13 @@ import langTools from "ace-builds/src-noconflict/ext-language_tools";
 /* TODO:
    1. In plugin config pane, change input type according to config value type specified in plugin config
    2. In general config, allow to change config value type
-   3. Fix delete config key
    3. Add version control
-    a. show commit tree
-    b. show diff
     c. undo button for each diff
     d. commit new version
     e. pull new version
     f. resolve conflicts
    4. Edit transformation metadata
    5. Add editor tooltips
-   6. Fix hiccups when reducing screen height
-   7. Fix wierdness with variable pane inputs
    7. Add input validation
 */
 const useStyles = makeStyles(theme => ({

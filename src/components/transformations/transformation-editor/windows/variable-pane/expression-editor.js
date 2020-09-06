@@ -46,6 +46,7 @@ export default function ExpressionEditor(props) {
   const classes = useStyles();
   const [isFocused, setIsFocused] = React.useState(false)
   const [value, setValue] = React.useState(props.data.value)
+  React.useEffect(() => setValue(props.data.value), [props.data])
 
   return (
     <div

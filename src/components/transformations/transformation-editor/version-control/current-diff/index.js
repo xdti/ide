@@ -14,7 +14,6 @@ const useStyles = makeStyles(theme => ({
 
 /*
 TODO:
-  2. Calculate diff for every part of transformation
   4. Add undo button
 */
 
