@@ -23,7 +23,7 @@ export default function TransformationList(props) {
   const [query, setQuery] = React.useState("");
   const [error, setError] = React.useState(null);
   const getTransformationList = () => transformations.filter(t => {
-    let name = t.name.toLowerCase();
+    let name = t.versions[t.versions.length - 1].name.toLowerCase();
     let lowerQuery = query.toLowerCase();
     return name.startsWith(lowerQuery)
   })

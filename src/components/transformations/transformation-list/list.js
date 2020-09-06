@@ -23,7 +23,7 @@ export default function (props) {
   return (
     <List className={classes.list}>
       {
-        props.transformations.map((t, i) => <Transformation key={t.id} transformation={t} setTransformation={() => props.setTransformation(t.id)}/>)
+        props.transformations.map((t, i) => <Transformation key={t.id} transformation={t.versions[t.versions.length - 1]} setTransformation={() => props.setTransformation(t.id)}/>)
       }
     </List>
   );
