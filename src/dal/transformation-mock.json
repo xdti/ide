@@ -136,7 +136,9 @@
           "value": "<Example>\n\t\n</Example>"
         }
       },
-      "plugins": {},
+      "plugins": {
+        "math": 1
+      },
       "config": {
         "general": {
           "exampleConfig": "value1"

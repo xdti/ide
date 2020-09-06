@@ -15,9 +15,20 @@ import 'ace-builds/webpack-resolver';
 import langTools from "ace-builds/src-noconflict/ext-language_tools";
 /* TODO:
    1. In plugin config pane, change input type according to config value type specified in plugin config
-   2. Add version control
-   3. Add editor tooltips
-   4. Add input validation
+   2. In general config, allow to change config value type
+   3. Fix delete config key
+   3. Add version control
+    a. show commit tree
+    b. show diff
+    c. undo button for each diff
+    d. commit new version
+    e. pull new version
+    f. resolve conflicts
+   4. Edit transformation metadata
+   5. Add editor tooltips
+   6. Fix hiccups when reducing screen height
+   7. Fix wierdness with variable pane inputs
+   7. Add input validation
 */
 const useStyles = makeStyles(theme => ({
   container: {
@@ -35,6 +46,7 @@ const useStyles = makeStyles(theme => ({
 export default function TransformationEditor(props) {
   const classes = useStyles();
   const [transformation, setTransformation] = React.useState({});
+  const [versions, setVersions] = React.useState([]);
   const [stagingArea, setStagingArea] = React.useState({});
   const [stagedTransformation, setStagedTransformation] = React.useState({});
   const [windows, setWindows] = React.useState({});
@@ -113,7 +125,10 @@ export default function TransformationEditor(props) {
   }, [transformation.input]);
 
   React.useEffect(() => {
-    dal.transformations.get(props.transformationId).then(setTransformation).catch(setError)
+    dal.transformations.get(props.transformationId).then(t => {
+      setTransformation(t.versions[t.versions.length - 1]);
+      setVersions(t.versions);
+    }).catch(setError)
   }, [props.transformationId]);
 
   return (
@@ -131,14 +146,16 @@ export default function TransformationEditor(props) {
           selectedWindow={selectedWindow}
           selectWindow={selectWindow}
           closeWindow={closeWindow}
-          update={(id, type, updates) => stagingUpdaters[type]({[id]: updates})}
+          update={(id, type, updates) => {
+            stagingUpdaters[type]({[id]: updates})
+          }}
           transformation={stagedTransformation}
           varTypes={varTypes}
           small={showVersionControl}
         />
         {
           showVersionControl ? (
-            <VersionControl close={() => setShowVersionControl(false)}/>
+            <VersionControl close={() => setShowVersionControl(false)} versions={versions} stagingArea={stagingArea} transformation={transformation}/>
           ) : ""
         }
       </div>
