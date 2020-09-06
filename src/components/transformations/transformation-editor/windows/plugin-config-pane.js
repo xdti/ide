@@ -13,6 +13,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'stretch',
+    overflowY: 'auto',
     '&>.MuiTextField-root': {
       width: '100%'
     },

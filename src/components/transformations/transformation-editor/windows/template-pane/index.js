@@ -10,6 +10,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexGrow: 1,
     padding: '10pt',
+    overflowY: 'auto',
     flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'stretch',
