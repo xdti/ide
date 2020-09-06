@@ -85,7 +85,7 @@ export default function Diff(props) {
             <ArrowForward fontSize="small"/>
             <Typography variant="caption" title={props.diff.newValue.toString()}>{props.diff.newValue.toString()}</Typography>
           </div>
-        ) : props.diff.entityName
+        ) : ""
       }
       </div>
     </div>
