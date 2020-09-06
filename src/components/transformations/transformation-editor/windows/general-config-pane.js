@@ -64,13 +64,13 @@ export default function GeneralConfigPane(props) {
               variant="outlined"
               label={startCase(k)}
               value={config[k]}
-              onChange={(e) => props.update({ [k]: e.target.value })}
+              onChange={(e) => update({ [k]: e.target.value })}
             />
             <Button
               variant="contained"
               color="secondary"
               title="Delete config"
-              onClick={(e) => props.update({ [k]: null })}
+              onClick={(e) => update({ [k]: null })}
             >
               <Delete />
             </Button>
