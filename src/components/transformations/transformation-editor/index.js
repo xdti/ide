@@ -54,7 +54,7 @@ export default function TransformationEditor(props) {
   const [previouslySelectedWindow, setPreviouslySelectedWindow] = React.useState(null);
   const [error, setError] = React.useState(null);
   const [varTypes, setVarTypes] = React.useState([]);
-  const [showVersionControl, setShowVersionControl] = React.useState(true);
+  const [showVersionControl, setShowVersionControl] = React.useState(false);
 
   React.useEffect(() => {
     langTools.addCompleter({
