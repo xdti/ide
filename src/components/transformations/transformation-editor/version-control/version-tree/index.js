@@ -48,7 +48,8 @@ export default function VersionTree(props) {
               render: <TreeNode />,
               foreignObjectWrapper: {
                 y: -35,
-                x: 10
+                x: 10,
+                width: '90%'
               }
             }}
           />
