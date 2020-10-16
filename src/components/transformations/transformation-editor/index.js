@@ -28,7 +28,6 @@ import langTools from "ace-builds/src-noconflict/ext-language_tools";
    4. Edit transformation metadata
    5. Add editor tooltips
    6. Add input validation
-   7. Add auto complete for templates, plugins and general config
 */
 const useStyles = makeStyles(theme => ({
   container: {
@@ -60,7 +59,7 @@ export default function TransformationEditor(props) {
     langTools.addCompleter(variableCompleter(stagedTransformation.variables));
     langTools.addCompleter(pluginCompleter(stagedTransformation.plugins));
     langTools.addCompleter(configCompleter(stagedTransformation.config));
-    langTools.addCompleter(templateCompleter(stagedTransformation.templates));
+    langTools.addCompleter(templateCompleter(stagedTransformation.templates, stagedTransformation.output));
     return () => langTools.setCompleters([
       langTools.snippetCompleter,
       langTools.textCompleter,
