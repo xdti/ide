@@ -5,6 +5,8 @@ import isNull from 'lodash/isNull';
 import cloneDeep from 'lodash/cloneDeep';
 import sortBy from 'lodash/sortBy';
 import { makeStyles } from '@material-ui/core/styles';
+import variableCompleter from 'completers/variables'
+import pluginCompleter from 'completers/plugins'
 import Header from './header';
 import ObjectSelector from './object-selector';
 import Windows from './windows';
@@ -53,24 +55,8 @@ export default function TransformationEditor(props) {
   const [showVersionControl, setShowVersionControl] = React.useState(false);
 
   React.useEffect(() => {
-    langTools.addCompleter({
-      name: 'variables-completer',
-      identifierRegexps: [/[^\s]+/],
-      getCompletions: (editor, session, pos, prefix, callback) => {
-        let current = editor.container.id;
-        let vars = sortBy(Object.values(stagedTransformation.variables || {}), ['order']);
-        let varNames = vars.map(v => v.name);
-        let isVar = varNames.includes(current);
-        callback(
-          null,
-          varNames
-            .filter(v => {
-              return v.includes(prefix) && (!isVar || varNames.indexOf(v) < varNames.indexOf(current))
-            })
-            .map(value => ({ value, meta: "variable" }))
-        );
-      }
-    });
+    langTools.addCompleter(variableCompleter(stagedTransformation.variables));
+    langTools.addCompleter(pluginCompleter(stagedTransformation.plugins));
     return () => langTools.setCompleters([
       langTools.snippetCompleter,
       langTools.textCompleter,
