@@ -4,6 +4,7 @@ import omitByDeep from 'helpers/omitByDeep';
 import isNull from 'lodash/isNull';
 import cloneDeep from 'lodash/cloneDeep';
 import sortBy from 'lodash/sortBy';
+import isEqual from 'lodash/isEqual';
 import { makeStyles } from '@material-ui/core/styles';
 import variableCompleter from 'completers/variables'
 import pluginCompleter from 'completers/plugins'
@@ -22,8 +23,6 @@ import langTools from "ace-builds/src-noconflict/ext-language_tools";
    2. In general config, allow to change config value type
    3. Add version control
     c. undo button for each diff
-    d. commit new version
-    e. pull new version
     f. resolve conflicts
    4. Edit transformation metadata
    5. Add editor tooltips
@@ -99,6 +98,18 @@ export default function TransformationEditor(props) {
     plugin: (updates) => updateStagingArea({ plugins: updates }),
     config: (updates) => updateStagingArea({ config: updates })
   }
+  const commit = async (message) => {
+    let newVersion = await dal.transformations.commit(stagedTransformation, message);
+    versions.push(newVersion);
+    setVersions(versions);
+    setTransformation(newVersion);
+    setStagingArea({});
+  }
+  const pull = async () => {
+    let newVersions = await dal.transformations.pull(props.transformationId, transformation.version);
+    setVersions(versions.concat(newVersions));
+    setTransformation(versions[versions.length - 1]);
+  }
 
   React.useEffect(() => {
     let newStagedTransformation = omitByDeep(merge({}, transformation, stagingArea), isNull);
@@ -146,6 +157,9 @@ export default function TransformationEditor(props) {
       </div>
       <Footer
         showVersionControl={() => setShowVersionControl(!showVersionControl)}
+        commit={commit}
+        pull={pull}
+        canCommit={!isEqual(transformation, stagedTransformation)}
       />
     </div>
   );

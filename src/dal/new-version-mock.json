@@ -1,0 +1,63 @@
+{
+  "version": 4,
+  "versionComment": "Added the best variable you can imagine",
+  "name": "Html2Json",
+  "description": "Turn html into json sad asd sad asdasf dsgfsdgsfg fdgfd gdf gdfgdfg fdgdf gdf gdfgdf gdfg dfgdfgdfg dfgdfgdfgfdg dfgdfg dfgd fgdfg asdasdf asdfsdfsdfsdfsdfsdfsdfsdf sdfsdfsdfsdfsdf sdfdsf sdfsd fsd fsd f sdfsdfsdfs dfsd fsd fs dfsdfsdfsdfsd gvb xcv xcv xvxc vxc vxc vxc vxcvx cvsd gsd gfdgfd gdfg fdg dfgdfg ",
+  "input": "XML",
+  "output": "JSON",
+  "owner": "Tamir Revivi",
+  "metadata": {
+    "a": 123456,
+    "b": 123456,
+    "c": 123456,
+    "d": 123456,
+    "e": 123456,
+    "f": 123456,
+    "g": 123456,
+    "h": 123456,
+    "i": 123456,
+    "j": 123456,
+    "k": 123456,
+    "l": 123456,
+    "m": 123456,
+    "n": 123456,
+    "o": 123456,
+    "p": 123456
+  },
+  "variables": {
+    "bb9e2f1d-4d04-4753-b031-d65a15028d99": {
+      "name": "var1",
+      "order": 1,
+      "description": "This is an example var and i want it to overflow",
+      "type": "xpath",
+      "value": "/Example/Var1/text()",
+      "dataType": "string",
+      "required": true
+    },
+    "bb9e2f1d-4d04-4753-b031-d65a15028d92": {
+      "name": "bestVar",
+      "order": 2,
+      "description": "This is the best var you can imagine",
+      "type": "expression",
+      "value": "return 1 + 1",
+      "dataType": "int",
+      "required": true
+    }
+  },
+  "templates": {
+    "58a97d8a-efa9-4b87-b128-e4f196840991": {
+      "name": "template1",
+      "order": 1,
+      "description": "This is an example template",
+      "value": "<Example>\n\t\n</Example>"
+    }
+  },
+  "plugins": {
+    "math": 1
+  },
+  "config": {
+    "general": {
+      "exampleConfig": "value1"
+    }
+  }
+}
