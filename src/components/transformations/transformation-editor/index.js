@@ -7,6 +7,8 @@ import sortBy from 'lodash/sortBy';
 import { makeStyles } from '@material-ui/core/styles';
 import variableCompleter from 'completers/variables'
 import pluginCompleter from 'completers/plugins'
+import configCompleter from 'completers/config'
+import templateCompleter from 'completers/templates'
 import Header from './header';
 import ObjectSelector from './object-selector';
 import Windows from './windows';
@@ -57,6 +59,8 @@ export default function TransformationEditor(props) {
   React.useEffect(() => {
     langTools.addCompleter(variableCompleter(stagedTransformation.variables));
     langTools.addCompleter(pluginCompleter(stagedTransformation.plugins));
+    langTools.addCompleter(configCompleter(stagedTransformation.config));
+    langTools.addCompleter(templateCompleter(stagedTransformation.templates));
     return () => langTools.setCompleters([
       langTools.snippetCompleter,
       langTools.textCompleter,
