@@ -5,8 +5,8 @@ export default (variables) => ({
   identifierRegexps: [/[^\s]+/],
   getCompletions: (editor, session, pos, prefix, callback) => {
     let current = editor.container.id;
-    let vars = sortBy(Object.values(variables || {}), ['order']);
-    let varNames = vars.map(v => v.name);
+    let varNames = sortBy(Object.values(variables || {}), ['order'])
+      .map(v => v.name);
     let isVar = varNames.includes(current);
     callback(
       null,
