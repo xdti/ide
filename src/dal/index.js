@@ -15,7 +15,8 @@ const varTypes = {
       {
         value: 'xpath',
         display: 'XPath',
-        dataTypes: ['string', 'int', 'float', 'bool', 'list']
+        dataTypes: ['string', 'int', 'float', 'bool', 'list'],
+        defaultListItem: 'string'
       },
       {
         value: 'expression',

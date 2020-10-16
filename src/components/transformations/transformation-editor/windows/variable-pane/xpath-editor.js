@@ -1,4 +1,5 @@
 import React from 'react';
+import DataTypeSelector from 'components/generic/data-type-selector';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -31,47 +32,13 @@ export default function XPathEditor(props) {
         onChange={(e) => props.update({ value: e.target.value })}
         className={classes.pathValueInput}
       />
-      <TextField
-        variant="outlined"
-        label="Data Type"
-        value={props.data.dataType}
-        onChange={(e) => {
-          let updates = { dataType: e.target.value };
-          if (e.target.value === 'list' && !props.data.listItemType){
-            updates.listItemType = 'string'
-          }
-          if (e.target.value !== 'list'){
-            updates.listItemType = null
-          }
-          props.update(updates)
-        }}
-        select
-        className={classes.dataTypeInput}
-      >
-        {
-          props.config.dataTypes.map(o => (
-            <MenuItem key={o} value={o}>{o}</MenuItem>
-          ))
-        }
-      </TextField>
-      {
-        props.data.dataType === 'list' ? (
-          <TextField
-            variant="outlined"
-            label="List Item Type"
-            value={props.data.listItemType}
-            onChange={(e) => props.update({ listItemType: e.target.value })}
-            select
-            className={classes.dataTypeInput}
-          >
-            {
-              props.config.dataTypes.filter(o => o !== 'list').map(o => (
-                <MenuItem key={o} value={o}>{o}</MenuItem>
-              ))
-            }
-          </TextField>
-        ) : ""
-      }
+      <DataTypeSelector
+        onChange={(updates) => props.update(updates)}
+        selectedDataType={props.data.dataType}
+        defaultListItem={props.config.defaultListItem}
+        listItemType={props.data.listItemType}
+        dataTypes={props.config.dataTypes}
+      />
     </div>
   );
 };
