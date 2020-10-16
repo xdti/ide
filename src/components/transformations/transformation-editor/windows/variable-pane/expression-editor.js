@@ -73,7 +73,7 @@ export default function ExpressionEditor(props) {
         className={classes.editor}
         name={props.data.name}
         fontSize={'1rem'}
-        debounceChangePeriod={500}
+        debounceChangePeriod={200}
         wrapEnabled={true}
         editorProps={{
           className: classes.editor
