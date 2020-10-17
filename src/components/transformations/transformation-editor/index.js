@@ -26,14 +26,12 @@ const merge = (...args) => mergeWith.apply(null, args.concat((val, src) => {
 }));
 
 /* TODO:
-   1. In plugin config pane, change input type according to config value type specified in plugin config
-   2. In general config, allow to change config value type
-   3. Add version control
+   1. Add version control
     c. undo button for each diff
     f. resolve conflicts
-   4. Edit transformation metadata
-   5. Add editor tooltips
-   6. Add input validation
+   2. Edit transformation metadata
+   3. Add editor tooltips
+   4. Add input validation
 */
 const useStyles = makeStyles(theme => ({
   container: {
