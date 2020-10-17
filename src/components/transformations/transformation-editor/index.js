@@ -1,5 +1,5 @@
 import React from 'react';
-import merge from 'lodash/merge';
+import mergeWith from 'lodash/mergeWith';
 import omitByDeep from 'helpers/omitByDeep';
 import isNull from 'lodash/isNull';
 import cloneDeep from 'lodash/cloneDeep';
@@ -18,6 +18,13 @@ import Footer from './footer';
 import dal from 'dal';
 import 'ace-builds/webpack-resolver';
 import langTools from "ace-builds/src-noconflict/ext-language_tools";
+
+const merge = (...args) => mergeWith.apply(null, args.concat((val, src) => {
+  if (Array.isArray(val)){
+    return src;
+  }
+}));
+
 /* TODO:
    1. In plugin config pane, change input type according to config value type specified in plugin config
    2. In general config, allow to change config value type
@@ -114,7 +121,8 @@ export default function TransformationEditor(props) {
   }
 
   React.useEffect(() => {
-    let newStagedTransformation = omitByDeep(merge({}, transformation, stagingArea), isNull);
+    let merged = merge({}, transformation, stagingArea);
+    let newStagedTransformation = omitByDeep(merged, isNull);
     setStagedTransformation(newStagedTransformation);
   }, [transformation, stagingArea]);
 

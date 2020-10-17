@@ -4,7 +4,7 @@ import isObject from 'lodash/isObject';
 const omitByDeep = (obj, cb) => {
   let res = omitBy(obj, cb);
   for (let key in res){
-    if (isObject(res[key])){
+    if (isObject(res[key]) && !Array.isArray(res[key])){
       res[key] = omitByDeep(res[key], cb);
     }
   }

@@ -1,12 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import startCase from 'lodash/startCase';
 import merge from 'lodash/merge';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Add from '@material-ui/icons/Add';
 import Delete from '@material-ui/icons/Delete';
 import DataTypeSelector from 'components/generic/data-type-selector';
+import DynamicTypeInput from 'components/generic/dynamic-type-input';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -27,6 +27,10 @@ const useStyles = makeStyles(theme => ({
   configForm: {
     width: '100%',
     display: 'flex',
+    height: '40pt',
+    '& .MuiInputBase-root': {
+      height: '40pt'
+    },
     '&>*:not(:last-child)': {
       marginRight: 10,
     }
@@ -62,29 +66,30 @@ export default function GeneralConfigPane(props) {
       {
         Object.keys(props.settings).map(k => (
           <div className={classes.configForm} key={k}>
-            <TextField
-              className={classes.maxWidthInput}
-              variant="outlined"
-              label={startCase(k)}
-              value={config[k]}
-              onChange={(e) => update({ [k]: e.target.value })}
-            />
             <Button
-              variant="contained"
-              color="secondary"
-              title="Delete config"
-              onClick={(e) => {
-                update({ [k]: null });
-                updateSettings(k, null)
-              }}
+            variant="contained"
+            color="secondary"
+            title="Delete config"
+            onClick={(e) => {
+              update({ [k]: null });
+              updateSettings(k, null)
+            }}
             >
               <Delete />
             </Button>
+            <DynamicTypeInput
+              dataType={props.settings[k]}
+              onChange={(v) => update({ [k]: v })}
+              fieldClass={classes.maxWidthInput}
+              value={config[k]}
+              fieldKey={k}
+            />
           </div>
         ))
       }
       <div className={classes.configForm}>
         <TextField
+          className={classes.maxWidthInput}
           variant="outlined"
           label="Config Key"
           value={newConfigKey}
