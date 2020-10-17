@@ -10,7 +10,8 @@ import TransformationEditor from './transformation-editor';
 const useStyles = makeStyles(theme => ({
   container: {
     display: 'flex',
-    flexGrow: 1
+    flexGrow: 1,
+    overflow: 'hidden'
   },
 }));
 

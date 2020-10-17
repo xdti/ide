@@ -38,6 +38,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
+    overflow: 'hidden'
   },
   content: {
     display: 'flex',
@@ -59,6 +60,7 @@ export default function TransformationEditor(props) {
   const [varTypes, setVarTypes] = React.useState([]);
   const [configTypes, setConfigTypes] = React.useState([]);
   const [showVersionControl, setShowVersionControl] = React.useState(false);
+  const [supportedFormats, setSupportedFormats] = React.useState([]);
 
   React.useEffect(() => {
     langTools.addCompleter(variableCompleter(stagedTransformation.variables));
@@ -103,7 +105,8 @@ export default function TransformationEditor(props) {
     template: (updates) => updateStagingArea({ templates: updates }),
     plugin: (updates) => updateStagingArea({ plugins: updates }),
     config: (updates) => updateStagingArea({ config: updates }),
-    generalConfig: (updates) => updateStagingArea({ generalConfig: updates })
+    generalConfig: (updates) => updateStagingArea({ generalConfig: updates }),
+    metadata: (updates) => updateStagingArea(updates)
   }
   const commit = async (message) => {
     let newVersion = await dal.transformations.commit(stagedTransformation, message);
@@ -125,11 +128,15 @@ export default function TransformationEditor(props) {
   }, [transformation, stagingArea]);
 
   React.useEffect(() => {
-    dal.transformations.getVarTypesByInput(transformation.input).then(setVarTypes).catch(setError)
+    dal.formats.getVarTypesByFormat(transformation.input).then(setVarTypes).catch(setError)
   }, [transformation.input]);
 
   React.useEffect(() => {
     dal.transformations.getConfigTypes().then(setConfigTypes).catch(setError)
+  }, [transformation.input]);
+
+  React.useEffect(() => {
+    dal.formats.getSupprotedFormats().then(setSupportedFormats).catch(setError)
   }, [transformation.input]);
 
   React.useEffect(() => {
@@ -141,7 +148,18 @@ export default function TransformationEditor(props) {
 
   return (
     <div className={classes.container}>
-      <Header name={transformation.name} />
+      <Header
+        name={stagedTransformation.name}
+        description={stagedTransformation.description}
+        supportedFormats={supportedFormats}
+        input={stagedTransformation.input}
+        output={stagedTransformation.output}
+        metadata={stagedTransformation.metadata}
+        owner={stagedTransformation.owner}
+        update={(id, type, updates) => {
+          stagingUpdaters[type]({[id]: updates})
+        }}
+      />
       <div className={classes.content}>
         <ObjectSelector
           transformation={stagedTransformation}

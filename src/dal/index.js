@@ -36,7 +36,6 @@ export default {
   transformations: {
     get: async (id) => transformations.find(t => t.id === id),
     getAll: async () => transformations,
-    getVarTypesByInput: async (input) => varTypes[input],
     commit: async (version, message) => {
       await delay(5000);
       version.version += 1;
@@ -48,6 +47,10 @@ export default {
       return [newVersion];
     },
     getConfigTypes: async () => configTypes
+  },
+  formats: {
+    getSupprotedFormats: async () => ['XML'],
+    getVarTypesByFormat: async (input) => varTypes[input]
   },
   plugins: {
     getPluginList: async () => plugins,
