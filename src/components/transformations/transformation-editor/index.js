@@ -29,7 +29,6 @@ const merge = (...args) => mergeWith.apply(null, args.concat((val, src) => {
    1. Add version control
     c. undo button for each diff
     f. resolve conflicts
-   2. Edit transformation metadata
    3. Add editor tooltips
    4. Add input validation
 */
