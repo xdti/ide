@@ -44,8 +44,10 @@ export default function Windows(props) {
     generalConfig: (id) => (
       <GeneralConfigPane
         data={props.transformation.config[id]}
+        settings={props.transformation.generalConfig}
         windowId={id}
         update={props.update}
+        configTypes={props.configTypes}
       />
     ),
     pluginConfig: (id) => (

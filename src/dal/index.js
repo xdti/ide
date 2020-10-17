@@ -5,6 +5,11 @@ import sortBy from 'lodash/sortBy';
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+const configTypes = {
+  dataTypes: ['string', 'int', 'float', 'bool', 'list'],
+  defaultDataType: 'string'
+}
+
 const varTypes = {
   'XML': {
     default: 'xpath',
@@ -41,7 +46,8 @@ export default {
     pull: async (transformationId, currentVersion) => {
       await delay(5000);
       return [newVersion];
-    }
+    },
+    getConfigTypes: async () => configTypes
   },
   plugins: {
     getPluginList: async () => plugins,

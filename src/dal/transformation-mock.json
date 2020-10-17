@@ -139,6 +139,11 @@
       "plugins": {
         "math": 1
       },
+      "generalConfig": {
+        "exampleConfig": {
+          "dataType": "string"
+        }
+      },
       "config": {
         "general": {
           "exampleConfig": "value1"

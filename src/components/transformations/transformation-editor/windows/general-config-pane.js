@@ -1,10 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import startCase from 'lodash/startCase';
+import merge from 'lodash/merge';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Add from '@material-ui/icons/Add';
 import Delete from '@material-ui/icons/Delete';
+import DataTypeSelector from 'components/generic/data-type-selector';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -38,14 +40,15 @@ export default function GeneralConfigPane(props) {
   const classes = useStyles();
   const config = props.data || {};
   const [newConfigKey, setNewConfigKey] = React.useState("");
-  const [newConfigValue, setNewConfigValue] = React.useState("");
+  const [newConfigDataType, setNewConfigDataType] = React.useState({ dataType: props.configTypes.defaultDataType });
 
   const update = (updates) => props.update(props.windowId, "config", updates);
+  const updateSettings = (key, updates) => props.update(key, "generalConfig", updates);
 
   const addNewConfig = () => {
-    update({ [newConfigKey]: newConfigValue });
+    updateSettings(newConfigKey, newConfigDataType)
     setNewConfigKey("");
-    setNewConfigValue("");
+    setNewConfigDataType({ dataType: props.configTypes.defaultDataType });
   }
 
   return (
@@ -57,7 +60,7 @@ export default function GeneralConfigPane(props) {
         onChange={(e) => update({ templateSelector: e.target.value })}
       />
       {
-        Object.keys(config).filter(k => k !== 'templateSelector').map(k => (
+        Object.keys(props.settings).map(k => (
           <div className={classes.configForm} key={k}>
             <TextField
               className={classes.maxWidthInput}
@@ -70,7 +73,10 @@ export default function GeneralConfigPane(props) {
               variant="contained"
               color="secondary"
               title="Delete config"
-              onClick={(e) => update({ [k]: null })}
+              onClick={(e) => {
+                update({ [k]: null });
+                updateSettings(k, null)
+              }}
             >
               <Delete />
             </Button>
@@ -84,12 +90,12 @@ export default function GeneralConfigPane(props) {
           value={newConfigKey}
           onChange={(e) => setNewConfigKey(e.target.value)}
         />
-        <TextField
-          variant="outlined"
-          label="Config Value"
-          value={newConfigValue}
-          onChange={(e) => setNewConfigValue(e.target.value)}
-          className={classes.maxWidthInput}
+        <DataTypeSelector
+          onChange={(dataType) => setNewConfigDataType(merge({}, newConfigDataType, dataType))}
+          selectedDataType={newConfigDataType.dataType}
+          defaultListItem={props.configTypes.defaultDataType}
+          listItemType={newConfigDataType.listItemType}
+          dataTypes={props.configTypes.dataTypes}
         />
         <Button
           variant="contained"

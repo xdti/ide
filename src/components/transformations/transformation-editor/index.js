@@ -52,6 +52,7 @@ export default function TransformationEditor(props) {
   const [previouslySelectedWindow, setPreviouslySelectedWindow] = React.useState(null);
   const [error, setError] = React.useState(null);
   const [varTypes, setVarTypes] = React.useState([]);
+  const [configTypes, setConfigTypes] = React.useState([]);
   const [showVersionControl, setShowVersionControl] = React.useState(false);
 
   React.useEffect(() => {
@@ -96,7 +97,8 @@ export default function TransformationEditor(props) {
     var: (updates) => updateStagingArea({ variables: updates }),
     template: (updates) => updateStagingArea({ templates: updates }),
     plugin: (updates) => updateStagingArea({ plugins: updates }),
-    config: (updates) => updateStagingArea({ config: updates })
+    config: (updates) => updateStagingArea({ config: updates }),
+    generalConfig: (updates) => updateStagingArea({ generalConfig: updates })
   }
   const commit = async (message) => {
     let newVersion = await dal.transformations.commit(stagedTransformation, message);
@@ -118,6 +120,10 @@ export default function TransformationEditor(props) {
 
   React.useEffect(() => {
     dal.transformations.getVarTypesByInput(transformation.input).then(setVarTypes).catch(setError)
+  }, [transformation.input]);
+
+  React.useEffect(() => {
+    dal.transformations.getConfigTypes().then(setConfigTypes).catch(setError)
   }, [transformation.input]);
 
   React.useEffect(() => {
@@ -147,6 +153,7 @@ export default function TransformationEditor(props) {
           }}
           transformation={stagedTransformation}
           varTypes={varTypes}
+          configTypes={configTypes}
           small={showVersionControl}
         />
         {
