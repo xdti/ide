@@ -4,9 +4,16 @@
     {
       "version": 1,
       "configs": {
-        "baseUrl": "string",
-        "timeout": "int",
-        "raiseForStatusCode": "boolean"
+        "baseUrl": {
+          "dataType": "string"
+        },
+        "timeout": {
+          "dataType": "int"
+        },
+        "raiseForStatusCode": {
+          "dataType": "list",
+          "listItemType": "int"
+        }
       },
       "code": "def ....mock"
     }
@@ -18,15 +25,21 @@
     {
       "version": 1,
       "configs": {
-        "delay": "int"
+        "delay": {
+          "dataType": "int"
+        }
       },
       "code": "def ....mock"
     },
     {
       "version": 2,
       "configs": {
-        "delay": "int",
-        "throw": "boolean"
+        "delay": {
+          "dataType": "int"
+        },
+        "throw": {
+          "dataType": "bool"
+        }
       },
       "code": "def ....mock"
     }

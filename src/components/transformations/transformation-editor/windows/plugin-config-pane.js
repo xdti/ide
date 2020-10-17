@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import startCase from 'lodash/startCase';
 import isUndefined from 'lodash/isUndefined';
-import TextField from '@material-ui/core/TextField';
+import DynamicTypeInput from 'components/generic/dynamic-type-input';
 import dal from 'dal';
 
 const useStyles = makeStyles(theme => ({
@@ -14,9 +14,6 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'flex-start',
     justifyContent: 'stretch',
     overflowY: 'auto',
-    '&>.MuiTextField-root': {
-      width: '100%'
-    },
     '&>*:not(:last-child)': {
       marginBottom: 20,
     }
@@ -29,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   maxWidthInput: {
-    flexGrow: 1
+    width: '100%'
   }
 }));
 
@@ -54,12 +51,13 @@ export default function PluginConfigPane(props) {
     <div className={classes.container}>
       {
         Object.entries(pluginConfig).map(([k, type]) => (
-          <TextField
+          <DynamicTypeInput
             key={k}
-            variant="outlined"
-            label={startCase(k)}
+            dataType={pluginConfig[k]}
+            onChange={(v) => update({ [k]: v })}
+            fieldClass={classes.maxWidthInput}
             value={config[k]}
-            onChange={(e) => update({ [k]: e.target.value })}
+            fieldKey={k}
           />
         ))
       }
