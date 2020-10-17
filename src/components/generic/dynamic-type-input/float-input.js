@@ -9,7 +9,7 @@ export default function FloatInput(props) {
       className={props.fieldClass}
       variant="outlined"
       type="number"
-      label={startCase(props.fieldKey)}
+      label={`${startCase(props.fieldKey)} (float)`}
       value={props.value || ""}
       onChange={(e) => props.onChange(parseFloat(e.target.value))}
     />

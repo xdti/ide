@@ -9,7 +9,7 @@ export default function IntInput(props) {
       className={props.fieldClass}
       variant="outlined"
       type="number"
-      label={startCase(props.fieldKey)}
+      label={`${startCase(props.fieldKey)} (int)`}
       value={props.value || ""}
       onChange={(e) => props.onChange(parseInt(e.target.value))}
     />

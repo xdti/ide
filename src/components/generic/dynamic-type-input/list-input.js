@@ -32,7 +32,7 @@ export default function ListInput(props) {
       onDelete={(chip, index) => handleDeleteChip(chip, index)}
       fullWidthInput={true}
       variant="outlined"
-      label={startCase(props.fieldKey)}
+      label={`${startCase(props.fieldKey)} (list<${props.itemType}>)`}
     />
   );
 };
