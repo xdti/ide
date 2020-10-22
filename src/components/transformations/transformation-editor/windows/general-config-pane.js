@@ -42,11 +42,17 @@ const useStyles = makeStyles(theme => ({
 
 export default function GeneralConfigPane(props) {
   const classes = useStyles();
-  const config = props.data || {};
+  const [inputValues, setInputValues] = React.useState(props.data || {});
+
+  const commitUpdate = (updates) => props.update(props.windowId, "config", updates);
+  const update = (updates) => {
+    setInputValues(merge({}, inputValues, updates));
+    commitUpdate(updates);
+  }
+
   const [newConfigKey, setNewConfigKey] = React.useState("");
   const [newConfigDataType, setNewConfigDataType] = React.useState({ dataType: props.configTypes.defaultDataType });
 
-  const update = (updates) => props.update(props.windowId, "config", updates);
   const updateSettings = (key, updates) => props.update(key, "generalConfig", updates);
 
   const addNewConfig = () => {
@@ -60,7 +66,7 @@ export default function GeneralConfigPane(props) {
       <TextField
         variant="outlined"
         label="Template Selector"
-        value={config.templateSelector || ""}
+        value={inputValues.templateSelector || ""}
         onChange={(e) => update({ templateSelector: e.target.value })}
       />
       {
@@ -81,7 +87,7 @@ export default function GeneralConfigPane(props) {
               dataType={props.settings[k]}
               onChange={(v) => update({ [k]: v })}
               fieldClass={classes.maxWidthInput}
-              value={config[k]}
+              value={inputValues[k]}
               fieldKey={k}
             />
           </div>

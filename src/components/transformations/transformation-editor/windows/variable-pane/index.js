@@ -1,4 +1,5 @@
 import React from 'react';
+import merge from 'lodash/merge';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -52,13 +53,20 @@ const useStyles = makeStyles(theme => ({
 
 export default function VariablePane(props) {
   const classes = useStyles();
-  const update = (updates) => props.update(props.windowId, "var", updates);
+  const [inputValues, setInputValues] = React.useState(props.data);
+
+  const commitUpdate = (updates) => props.update(props.windowId, "var", updates);
+  const update = (updates) => {
+    setInputValues(merge({}, inputValues, updates));
+    commitUpdate(updates);
+  }
+
   const renderValueEditor = {
     xpath: (
       <XPathEditor
         config={props.varTypes.options.find(t => t.value === 'xpath')}
         data={props.data}
-        update={update}
+        update={commitUpdate}
       />
     ),
     expression: (
@@ -74,19 +82,19 @@ export default function VariablePane(props) {
       <TextField
         variant="outlined"
         label="Name"
-        value={props.data.name}
+        value={inputValues.name}
         onChange={(e) => update({ name: e.target.value })}
       />
       <TextField
         variant="outlined"
         label="Description"
-        value={props.data.description}
+        value={inputValues.description}
         onChange={(e) => update({ description: e.target.value })}
       />
       <FormControl component="fieldset" className={classes.checkboxGroup}>
         <FormGroup>
           <FormControlLabel
-          control={<Checkbox color="primary" checked={props.data.required} onChange={(e) => update({ required: e.target.checked })} value="required" />}
+          control={<Checkbox color="primary" checked={inputValues.required} onChange={(e) => update({ required: e.target.checked })} value="required" />}
           label="Required"
           />
         </FormGroup>
@@ -94,7 +102,7 @@ export default function VariablePane(props) {
       <TextField
         variant="outlined"
         label="Type"
-        value={props.data.type}
+        value={inputValues.type}
         onChange={(e) => update({ type: e.target.value })}
         select
       >

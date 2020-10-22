@@ -29,8 +29,8 @@ const merge = (...args) => mergeWith.apply(null, args.concat((val, src) => {
    1. Add version control
     c. undo button for each diff
     f. resolve conflicts
-   3. Add editor tooltips
-   4. Add input validation
+   2. Add editor tooltips
+   3. Add input validation
 */
 const useStyles = makeStyles(theme => ({
   container: {

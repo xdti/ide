@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import merge from 'lodash/merge';
 import startCase from 'lodash/startCase';
 import isUndefined from 'lodash/isUndefined';
 import DynamicTypeInput from 'components/generic/dynamic-type-input';
@@ -35,11 +36,15 @@ export default function PluginConfigPane(props) {
     props.closeSelf();
   }
   const classes = useStyles();
-  const config = props.data || {};
+  const [inputValues, setInputValues] = React.useState(props.data || {});
   const [pluginConfig, setPluginConfig] = React.useState({});
   const [error, setError] = React.useState(null);
 
-  const update = (updates) => props.update(props.windowId, "config", updates);
+  const commitUpdate = (updates) => props.update(props.windowId, "config", updates);
+  const update = (updates) => {
+    setInputValues(merge({}, inputValues, updates));
+    commitUpdate(updates);
+  }
 
   React.useEffect(() => {
     dal.plugins.getPluginConfig(props.windowId, props.pluginVersion)
@@ -56,7 +61,7 @@ export default function PluginConfigPane(props) {
             dataType={pluginConfig[k]}
             onChange={(v) => update({ [k]: v })}
             fieldClass={classes.maxWidthInput}
-            value={config[k]}
+            value={inputValues[k]}
             fieldKey={k}
           />
         ))

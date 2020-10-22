@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import merge from 'lodash/merge';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Delete from '@material-ui/icons/Delete';
@@ -30,25 +31,31 @@ const useStyles = makeStyles(theme => ({
 
 export default function TemplatePane(props) {
   const classes = useStyles();
-  const update = (updates) => props.update(props.windowId, "template", updates);
+  const [inputValues, setInputValues] = React.useState(props.data);
+
+  const commitUpdate = (updates) => props.update(props.windowId, "template", updates);
+  const update = (updates) => {
+    setInputValues(merge({}, inputValues, updates));
+    commitUpdate(updates);
+  }
 
   return (
     <div className={classes.container}>
       <TextField
         variant="outlined"
         label="Name"
-        value={props.data.name}
+        value={inputValues.name}
         onChange={(e) => update({ name: e.target.value })}
       />
       <TextField
         variant="outlined"
         label="Description"
-        value={props.data.description}
+        value={inputValues.description}
         onChange={(e) => update({ description: e.target.value })}
       />
       <TemplateEditor
         data={props.data}
-        update={update}
+        update={commitUpdate}
       />
       <div className={classes.actions}>
         <Button variant="contained" color="secondary" title="Delete template" onClick={() => {

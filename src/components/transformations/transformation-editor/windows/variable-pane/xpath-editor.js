@@ -22,14 +22,18 @@ const useStyles = makeStyles(theme => ({
 
 export default function XPathEditor(props) {
   const classes = useStyles();
+  const [xpath, setXPath] = React.useState(props.data.value || "");
 
   return (
     <div className={classes.pathEditor}>
       <TextField
         variant="outlined"
         label="XPath"
-        value={props.data.value}
-        onChange={(e) => props.update({ value: e.target.value })}
+        value={xpath}
+        onChange={(e) => {
+          setXPath(e.target.value)
+          props.update({ value: e.target.value });
+        }}
         className={classes.pathValueInput}
       />
       <DataTypeSelector
